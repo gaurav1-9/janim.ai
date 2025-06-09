@@ -2,7 +2,7 @@ import React from 'react'
 
 const App = () => {
   return (
-    <div className='w-full h-full bg-zinc-300'>
+    <div className='w-full h-full bg-platinum'>
       Hello
     </div>
   )
