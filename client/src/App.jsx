@@ -6,7 +6,7 @@ import Navbar from './components/Navbar'
 
 const App = () => {
   return (
-    <div className='w-full bg-seaSalt px-8 py-5'>
+    <div className='w-full bg-seaSalt'>
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />

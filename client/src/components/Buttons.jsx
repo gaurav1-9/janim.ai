@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-const Buttons = ({ bgColor, width, textColor, goTo}) => {
+const Buttons = ({ bgColor, width, textColor, goTo, text, otherResponsiveStyles}) => {
     return (
         <Link to={goTo}>
-            <button className={`${bgColor} border-2 border-chineseViolet rounded-md ${width} py-2.5 ${textColor} font-semibold mt-3`}>
-                Generate a Quiz
+            <button className={`${bgColor} border-2 border-chineseViolet rounded-md ${width} ${textColor} font-semibold ${otherResponsiveStyles} cursor-pointer`}>
+                {text}
             </button>
         </Link>
     )
