@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { PiCopyright } from "react-icons/pi";
 import { FcLike } from "react-icons/fc";
 import { IoIosMail } from "react-icons/io";
-import { Link } from 'react-router-dom';
+import { TbWorld } from "react-icons/tb";
 import { FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
 const Footer = () => {
@@ -35,6 +36,7 @@ const Footer = () => {
                             <a href="https://www.instagram.com/gaurav1_9/" target='_blank' className='hover:text-ivory/80'><FaInstagram /></a>
                             <a href="https://www.linkedin.com/in/gaurav-kumar-das/" target='_blank' className='hover:text-ivory/80'><FaLinkedinIn /></a>
                             <a href="https://github.com/gaurav1-9" target='_blank' className='hover:text-ivory/80'><FaGithub /></a>
+                            <a href="https://gauravkrdas-portfolio.vercel.app" target='_blank' className='hover:text-ivory/80'><TbWorld /></a>
                         </div>
                     </div>
                 </div>
