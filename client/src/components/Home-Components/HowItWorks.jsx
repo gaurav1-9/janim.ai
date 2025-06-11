@@ -3,7 +3,7 @@ import Cards from './Cards'
 
 const HowItWorks = () => {
     return (
-        <div className="flex flex-col py-13 bg-pistachio items-center w-full">
+        <div className="flex flex-col py-8 lg:py-13 bg-pistachio items-center w-full">
             <p className='w-70 lg:w-full text-3xl lg:text-5xl text-eerieBlack font-semibold text-center'>
                 Here's How the <span className='text-ivory font-extrabold'>MAGIC</span> Happens
             </p>
