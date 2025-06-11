@@ -1,10 +1,12 @@
 import React from 'react'
 import HeroSection from '../components/Home-Components/HeroSection';
+import HowItWorks from '../components/Home-Components/HowItWorks';
 
 const Home = () => {
     return (
-        <div className='px-8 py-5 lg:px-40 lg:py-10'>
-            <HeroSection/>
+        <div className=''>
+            <HeroSection />
+            <HowItWorks />
         </div>
     )
 }

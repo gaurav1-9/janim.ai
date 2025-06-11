@@ -4,7 +4,7 @@ import Buttons from '../Buttons';
 
 const HeroSection = () => {
     return (
-        <div className='flex flex-col md:flex-row lg:justify-between lg:items-center xl:-mt-15 2xl:mt-0'>
+        <div className='px-8 py-5 lg:px-40 lg:py-10 flex flex-col md:flex-row lg:justify-between lg:items-center xl:-mt-15 2xl:mt-0'>
             <div className='text-eerieBlack pt-5 2xl:pt-0'>
                 <p className='font-semibold text-3xl lg:text-5xl w-70 lg:w-150'>AI-powered quizzes that challenge your knowledge.</p>
                 <p className='w-40 lg:w-full leading-5 pt-2 lg:pt-5 text-base lg:text-3xl'>Think you know it all? Let's find out.</p>
