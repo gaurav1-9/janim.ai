@@ -1,9 +1,12 @@
 import React from 'react'
+import Footer from '../components/Footer';
+import GenerateHeading from '../components/GenerateQuiz-Components/GenerateHeading';
 
 const GenerateQuiz = () => {
   return (
     <div>
-      Quiz
+      <GenerateHeading />
+      <Footer />
     </div>
   )
 }
