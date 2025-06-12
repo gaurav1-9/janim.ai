@@ -8,7 +8,7 @@ const GenerateQuiz = () => {
     <div className='w-full'>
       <GenerateHeading />
       <InputArea />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }
