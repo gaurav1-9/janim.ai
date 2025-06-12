@@ -10,9 +10,9 @@ const Footer = () => {
     const year = new Date().getFullYear();
     return (
         <div className='bg-chineseViolet'>
-            <div className='flex justify-center lg:justify-between flex-col lg:flex-row-reverse lg:pt-10 lg:px-40'>
-                <Link to='/' className='cursor-default'>
-                    <img src="/Logo/FooterLogo.png" alt="" className='scale-50 lg:scale-80 mt-5 lg:mt-0' draggable='false' />
+            <div className='flex justify-center md:justify-between flex-col md:flex-row-reverse md:pt-10 md:px-20 lg:px-40'>
+                <Link to='/' className='cursor-default ml-8'>
+                    <img src="/Logo/FooterLogo.png" alt="" className='scale-50 md:scale-80 mt-5 md:mt-0' draggable='false' />
                 </Link>
                 <div className='flex flex-col lg:flex-row lg:gap-30'>
                     <div className='flex flex-col px-8 lg:px-0 text-ivory'>
@@ -26,8 +26,8 @@ const Footer = () => {
                         </Link>
                     </div>
                     <div className='flex flex-col px-8 lg:px-0 mt-5 lg:mt-0 text-ivory'>
-                        <p className='text-lg lg:text-2xl font-semibold'>Contact the Developer</p>
-                        <div className='w-59 lg:w-79 h-0.5 bg-ivory mb-2'></div>
+                        <p className='text-lg lg:text-2xl font-semibold'>Connect with the Developer</p>
+                        <div className='w-59 lg:w-84 h-0.5 bg-ivory mb-2'></div>
                         <div className='flex items-center gap-1 lg:mb-1'>
                             <IoIosMail className='text-xl lg:text-2xl' />
                             <p className='lg:text-xl'>gauravkrdas19@gmail.com</p>
