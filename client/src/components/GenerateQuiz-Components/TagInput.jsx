@@ -1,5 +1,7 @@
 import React from 'react'
 import { RxCrossCircled } from "react-icons/rx";
+import Buttons from '../Buttons';
+import { FaArrowRightLong } from 'react-icons/fa6';
 
 
 const TagInput = ({ addTags, removeTag, tags, input, inpErr, setInput }) => {
@@ -26,6 +28,9 @@ const TagInput = ({ addTags, removeTag, tags, input, inpErr, setInput }) => {
                     className='grow outline-none'
                     placeholder='Enter your topic here...'
                 />
+            </div>
+            <div className="hidden lg:flex justify-end">
+                <Buttons bgColor='bg-chineseViolet hover:bg-chineseViolet/90 hover:border-chineseViolet/0' width='w-full lg:w-95' textColor='text-ivory' text='Generate a Quiz' goTo='/generate' otherResponsiveStyles='mt-3 lg:py-3 lg:text-xl' icon={<FaArrowRightLong />}/>
             </div>
         </div>
     )

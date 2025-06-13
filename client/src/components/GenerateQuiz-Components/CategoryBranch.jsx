@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CategoryBranch = () => {
+const CategoryBranch = ({ category }) => {
     return (
         <div className='flex justify-center relative'>
             {/* Dekstop Curve */}
@@ -12,14 +12,26 @@ const CategoryBranch = () => {
                     preserveAspectRatio="xMidYMid meet"
                 >
                     <g strokeWidth="2">
-                        <path d="M2,150 C15,150 5,65 25,65" className="stroke-chineseViolet" ></path>
-                        <path d="M2,160 25,160" className="stroke-chineseViolet" ></path>
-                        <path d="M2,170 C15,170 5,255 25,255" className="stroke-chineseViolet" ></path>
+                        <path d="M2,150 C15,150 5,65 25,65"
+                            className={`${(category === 'I') ? 'stroke-pistachio' : 'stroke-chineseViolet'}`}
+                        />
+                        <path d="M2,160 25,160"
+                            className={`${(category === 'II') ? 'stroke-pistachio' : 'stroke-chineseViolet'}`}
+                        />
+                        <path d="M2,170 C15,170 5,255 25,255"
+                            className={`${(category === 'III') ? 'stroke-pistachio' : 'stroke-chineseViolet'}`}
+                        />
                     </g>
                     <g>
-                        <circle cx="35" cy="65" r="4" className="fill-chineseViolet" ></circle>
-                        <circle cx="35" cy="160" r="4" className="fill-chineseViolet"></circle>
-                        <circle cx="35" cy="255" r="4" className="fill-chineseViolet"></circle>
+                        <circle cx="35" cy="65" r="4"
+                            className={`${(category === 'I') ? 'fill-pistachio' : 'fill-chineseViolet'}`}
+                        />
+                        <circle cx="35" cy="160" r="4"
+                            className={`${(category === 'II') ? 'fill-pistachio' : 'fill-chineseViolet'}`}
+                        />
+                        <circle cx="35" cy="255" r="4"
+                            className={`${(category === 'III') ? 'fill-pistachio' : 'fill-chineseViolet'}`}
+                        />
                     </g>
                 </svg>
             </div>
@@ -34,14 +46,26 @@ const CategoryBranch = () => {
                 >
                     <g transform="rotate(90, 150, 150)">
                         <g strokeWidth="2">
-                            <path d="M2,150 C15,150 5,65 25,65" className='stroke-chineseViolet' />
-                            <path d="M2,160 25,160" className='stroke-chineseViolet' />
-                            <path d="M2,170 C15,170 5,255 25,255" className='stroke-chineseViolet' />
+                            <path d="M2,150 C15,150 5,65 25,65"
+                                className={`${(category === 'III') ? 'stroke-pistachio' : 'stroke-chineseViolet'}`}
+                            />
+                            <path d="M2,160 25,160"
+                                className={`${(category === 'II') ? 'stroke-pistachio' : 'stroke-chineseViolet'}`}
+                            />
+                            <path d="M2,170 C15,170 5,255 25,255"
+                                className={`${(category === 'I') ? 'stroke-pistachio' : 'stroke-chineseViolet'}`}
+                            />
                         </g>
                         <g>
-                            <circle cx="35" cy="65" r="4" className='fill-chineseViolet' />
-                            <circle cx="35" cy="160" r="4" className='fill-chineseViolet' />
-                            <circle cx="35" cy="255" r="4" className='fill-chineseViolet' />
+                            <circle cx="35" cy="65" r="4"
+                                className={`${(category === 'III') ? 'fill-pistachio' : 'fill-chineseViolet'}`}
+                            />
+                            <circle cx="35" cy="160" r="4"
+                                className={`${(category === 'II') ? 'fill-pistachio' : 'fill-chineseViolet'}`}
+                            />
+                            <circle cx="35" cy="255" r="4"
+                                className={`${(category === 'I') ? 'fill-pistachio' : 'fill-chineseViolet'}`}
+                            />
                         </g>
                     </g>
                 </svg>
