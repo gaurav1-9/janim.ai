@@ -6,7 +6,7 @@ import { FaArrowRightLong } from 'react-icons/fa6';
 
 const TagInput = ({ addTags, removeTag, tags, input, inpErr, setInput }) => {
     return (
-        <div className='px-8 lg:pr-3 py-5 md:px-20 xl:pl-40 flex flex-col text-eerieBlack relative lg:w-6/11'>
+        <div className='max-h-60 px-8 lg:pr-3 py-5 md:px-20 xl:pl-40 flex flex-col text-eerieBlack relative lg:w-6/11'>
             <p className={`text-sm lg:text-lg absolute z-10 -top-2 text-lightRed/70 font-semibold ${(inpErr) ? 'opacity-100 top-0' : 'opacity-0 bg-seaSalt -top-2'} duration-300 ease-in-out`}>Enter at least 3 characters.</p>
             <div className="w-full lg:mt-2  px-2 py-3 border-[1.5px] md:border-[1.8px] lg:border-2 border-chineseViolet rounded-lg flex flex-wrap gap-2">
                 {
@@ -25,7 +25,7 @@ const TagInput = ({ addTags, removeTag, tags, input, inpErr, setInput }) => {
                     value={input}
                     onChange={(e) => setInput(e.target.value.toLowerCase())}
                     onKeyDown={addTags}
-                    className='grow outline-none'
+                    className='grow outline-none placeholder:text-chineseViolet/70 text-eerieBlack'
                     placeholder='Enter your topic here...'
                 />
             </div>
