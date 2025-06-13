@@ -54,10 +54,10 @@ const InputArea = () => {
     };
 
     return (
-        <div className='flex flex-col lg:flex-row w-full'>
+        <div className='flex flex-col lg:flex-row w-full relative lg:pb-25 lg:mt-10'>
             <TagInput addTags={addTags} removeTag={removeTag} tags={tags} input={input} inpErr={inpErr} setInput={setInput} />
             <CategoryBranch category={category.category}/>
-            <QuizCategory category={category} changeCategory={changeCategory}/>
+            <QuizCategory category={category} changeCategory={changeCategory} quizCategory={questionCategory}/>
         </div>
 
     );

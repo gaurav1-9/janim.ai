@@ -1,13 +1,11 @@
 import React from 'react'
 import MobileViewCategory from './MobileViewCategory';
+import DekstopViewCategory from './DekstopViewCategory';
 
-const QuizCategory = ({ category, changeCategory }) => {
+const QuizCategory = ({ category, changeCategory,quizCategory }) => {
     return (
         <div>
-            {/* Dekstop Layout */}
-            <div className="hidden lg:flex"></div>
-
-            {/* Mobile Layout */}
+            <DekstopViewCategory category={category} changeCategory={changeCategory} quizCategory={quizCategory}/>
             <MobileViewCategory category={category} changeCategory={changeCategory}/>
         </div>
     )
