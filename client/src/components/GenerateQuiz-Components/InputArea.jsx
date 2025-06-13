@@ -30,6 +30,8 @@ const InputArea = () => {
     const [input, setInput] = useState('');
     const [category, setCategory] = useState(questionCategory[0]);
 
+    const show = ()=>{console.log(category)}
+
     const addTags = (e) => {
         if ((e.key === "Enter" || e.key === "Tab") && input.trim() !== "") {
             if (input.length < 3) {
@@ -47,6 +49,7 @@ const InputArea = () => {
 
     const changeCategory = (index)=>{
         setCategory(questionCategory[index]);
+        show()
     }
 
     const removeTag = (indexToRemove) => {

@@ -2,11 +2,11 @@ import React from 'react'
 
 const DekstopViewCategory = ({ category, changeCategory, quizCategory }) => {
     return (
-        <div className="hidden lg:flex flex-col pl-15 absolute -top-35">
+        <div className="hidden lg:flex flex-col pl-15 absolute -top-36">
             <p className='text-lg text-chineseViolet pb-1'>Question Categories...</p>
             <div className="flex flex-col gap-10">
                 <div
-                    className={`px-5 w-100 py-3 rounded-xl flex justify-between items-center border-3 ${(category.category === 'I') ? 'border-pistachio' : 'border-chineseViolet'} cursor-pointer`}
+                    className={`px-5 xl:w-100 min-[1024px]:w-90 py-3 rounded-xl flex justify-between items-center border-3 ${(category.category === 'I') ? 'border-pistachio' : 'border-chineseViolet hover:scale-[1.02] hover:shadow-md'} ease-in-out duration-200 cursor-pointer`}
                     onClick={() => changeCategory(0)}
                 >
                     <div className={`${(category.category === 'I') ? 'text-pistachio' : 'text-chineseViolet'}`}>
@@ -20,7 +20,7 @@ const DekstopViewCategory = ({ category, changeCategory, quizCategory }) => {
                 </div>
 
                 <div
-                    className={`px-5 w-100 py-3 rounded-xl flex justify-between items-center border-3 ${(category.category === 'II') ? 'border-pistachio' : 'border-chineseViolet'} cursor-pointer`}
+                    className={`px-5 xl:w-100 min-[1024px]:w-90 py-3 rounded-xl flex justify-between items-center border-3 ${(category.category === 'II') ? 'border-pistachio' : 'border-chineseViolet hover:scale-[1.02] hover:shadow-md'} ease-in-out duration-200 cursor-pointer`}
                     onClick={() => changeCategory(1)}
                 >
                     <div className={`${(category.category === 'II') ? 'text-pistachio' : 'text-chineseViolet'}`}>
@@ -34,7 +34,7 @@ const DekstopViewCategory = ({ category, changeCategory, quizCategory }) => {
                 </div>
 
                 <div
-                    className={`px-5 w-100 py-3 rounded-xl flex justify-between items-center border-3 ${(category.category === 'III') ? 'border-pistachio' : 'border-chineseViolet'} cursor-pointer`}
+                    className={`px-5 xl:w-100 min-[1024px]:w-90 py-3 rounded-xl flex justify-between items-center border-3 ${(category.category === 'III') ? 'border-pistachio' : 'border-chineseViolet hover:scale-[1.02] hover:shadow-md'} ease-in-out duration-200 cursor-pointer`}
                     onClick={() => changeCategory(2)}
                 >
                     <div className={`${(category.category === 'III') ? 'text-pistachio' : 'text-chineseViolet'}`}>
