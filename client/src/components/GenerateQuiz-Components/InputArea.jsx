@@ -91,6 +91,7 @@ const InputArea = () => {
             }, 3600);
             return;
         }
+        console.log("Go to Quiz page");
     }
 
     return (

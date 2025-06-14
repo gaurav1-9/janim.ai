@@ -27,8 +27,8 @@ const TagInput = ({ addTags, removeTag, tags, input, inpErr, setInput, tagList }
                     value={input}
                     onChange={(e) => setInput(e.target.value.toLowerCase())}
                     onKeyDown={addTags}
-                    className='grow outline-none placeholder:text-chineseViolet/70 text-eerieBlack'
-                    placeholder='Enter your topic here...'
+                    className='min-w-[295px] grow outline-none placeholder:text-chineseViolet/70 placeholder:text-sm placeholder:lg:text-base text-eerieBlack'
+                    placeholder='Add topics (press Enter or Tab to add)...'
                 />
             </div>
             <div className="hidden lg:flex justify-end">
