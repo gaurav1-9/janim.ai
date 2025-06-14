@@ -26,18 +26,33 @@ const InputArea = () => {
     ]
 
     const [tags, setTags] = useState([]);
-    const [inpErr, setInperr] = useState(false);
+    const [inpErr, setInperr] = useState({
+        isErr: false,
+        errType: null,
+    });
     const [input, setInput] = useState('');
     const [category, setCategory] = useState(questionCategory[0]);
 
-    const show = ()=>{console.log(category)}
+    const show = () => { console.log(category) }
 
     const addTags = (e) => {
         if ((e.key === "Enter" || e.key === "Tab") && input.trim() !== "") {
             if (input.length < 3) {
-                setInperr(true);
+                setInperr({
+                    isErr: true,
+                    errType: 0,
+                });
                 setTimeout(() => {
-                    setInperr(false)
+                    setInperr(prev => ({
+                        ...prev,
+                        isErr: false,
+                    }));
+                    setTimeout(() => {
+                        setInperr(prev => ({
+                            ...prev,
+                            errType: null,
+                        }));
+                    }, 300);
                 }, 3600);
                 return;
             }
@@ -47,7 +62,7 @@ const InputArea = () => {
         }
     };
 
-    const changeCategory = (index)=>{
+    const changeCategory = (index) => {
         setCategory(questionCategory[index]);
         show()
     }
@@ -56,11 +71,33 @@ const InputArea = () => {
         setTags(tags.filter((_, index) => index !== indexToRemove));
     };
 
+    const tagList = () => {
+        if (!tags.length) {
+            setInperr({
+                isErr: true,
+                errType: 1,
+            });
+            setTimeout(() => {
+                setInperr(prev => ({
+                    ...prev,
+                    isErr: false,
+                }));
+                setTimeout(() => {
+                    setInperr(prev => ({
+                        ...prev,
+                        errType: null,
+                    }));
+                }, 300);
+            }, 3600);
+            return;
+        }
+    }
+
     return (
         <div className='flex flex-col lg:flex-row w-full relative lg:pb-25 lg:mt-10'>
-            <TagInput addTags={addTags} removeTag={removeTag} tags={tags} input={input} inpErr={inpErr} setInput={setInput} />
-            <CategoryBranch category={category.category}/>
-            <QuizCategory category={category} changeCategory={changeCategory} quizCategory={questionCategory}/>
+            <TagInput addTags={addTags} removeTag={removeTag} tags={tags} input={input} inpErr={inpErr} setInput={setInput} tagList={tagList} />
+            <CategoryBranch category={category.category} />
+            <QuizCategory category={category} changeCategory={changeCategory} quizCategory={questionCategory} tagList={tagList}/>
         </div>
 
     );
