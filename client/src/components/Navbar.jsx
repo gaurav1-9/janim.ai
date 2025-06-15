@@ -22,8 +22,8 @@ const Navbar = () => {
                 <Link to='/'><p className='text-chineseViolet cursor-pointer text-2xl hover:underline underline-offset-8'>Home</p></Link>
                 <Link to='/generate'><p className='text-chineseViolet cursor-pointer text-2xl hover:underline underline-offset-8'>Generate</p></Link>
                 <div className='flex gap-4'>
-                    <Buttons bgColor='bg-chineseViolet hover:bg-chineseViolet/90 hover:border-chineseViolet/0' width='' textColor='text-ivory' text='Sign In' goTo='/' otherResponsiveStyles='px-5 py-1' />
-                    <Buttons bgColor='bg-seaSalt hover:border-chineseViolet/90 hover:border-chineseViolet/90' width='' textColor='text-chineseViolet' text='Sign Up' goTo='/' otherResponsiveStyles='px-5 py-1' />
+                    <Buttons bgColor='bg-chineseViolet hover:bg-chineseViolet/90 hover:border-chineseViolet/0' width='' textColor='text-ivory' text='Sign In' goTo='/auth/login' otherResponsiveStyles='px-5 py-1' />
+                    <Buttons bgColor='bg-seaSalt hover:border-chineseViolet/90 hover:border-chineseViolet/90' width='' textColor='text-chineseViolet' text='Sign Up' goTo='/auth/register' otherResponsiveStyles='px-5 py-1' />
                 </div>
             </div>
 
@@ -33,10 +33,10 @@ const Navbar = () => {
                     <Link to='/' onClick={() => setIsMenuOpen(false)}><p className='text-chineseViolet text-xl'>Home</p></Link>
                     <Link to='/generate' onClick={() => setIsMenuOpen(false)}><p className='text-chineseViolet text-xl'>Generate</p></Link>
                     <div className='w-fit' onClick={() => setIsMenuOpen(false)}>
-                        <Buttons bgColor='bg-chineseViolet hover:bg-chineseViolet/90' width='' textColor='text-ivory' text='Sign In' goTo='/' otherResponsiveStyles='px-5 py-2' />
+                        <Buttons bgColor='bg-chineseViolet hover:bg-chineseViolet/90' width='' textColor='text-ivory' text='Sign In' goTo='/auth/login' otherResponsiveStyles='px-5 py-2' />
                     </div>
                     <div className='w-fit' onClick={() => setIsMenuOpen(false)}>
-                        <Buttons bgColor='bg-seaSalt hover:border-chineseViolet/90' width='' textColor='text-chineseViolet' text='Sign Up' goTo='/' otherResponsiveStyles='px-5 py-2' />
+                        <Buttons bgColor='bg-seaSalt hover:border-chineseViolet/90' width='' textColor='text-chineseViolet' text='Sign Up' goTo='/auth/register' otherResponsiveStyles='px-5 py-2' />
                     </div>
                 </div>
             </div>
