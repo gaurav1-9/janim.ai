@@ -1,13 +1,21 @@
 const express = require("express");
-const dotenv = require("dotenv");
 const morgan = require("morgan");
 const cors = require("cors");
-const mongoose = require("mongoose");
 
-const app = express()
+const dotenv = require("dotenv");
 dotenv.config()
 
+const AuthRoute = require("./Routes/auth.routes")
+
+const connectToDB = require("./config/config_DB")
+connectToDB();
+
+const app = express()
 app.use(express.json())
-app.use(morgan("common"))
+app.use(express.urlencoded({ extended: true }))
+app.use(morgan("dev"))
+
+
+app.use("/api/auth", AuthRoute)
 
 app.listen(5000, () => console.log("Server Listening on PORT 5000..."))
