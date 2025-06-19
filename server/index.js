@@ -7,6 +7,7 @@ dotenv.config()
 
 const {AuthRoute} = require("./Routes/auth.routes")
 const UserRoute = require("./Routes/user.routes")
+const QuizRoute = require("./Routes/quiz.routes")
 
 const connectToDB = require("./config/config_DB")
 connectToDB();
@@ -19,5 +20,6 @@ app.use(morgan("dev"))
 
 app.use("/api/auth", AuthRoute)
 app.use("/api/users", UserRoute)
+app.use("/api/quiz", QuizRoute)
 
 app.listen(5000, () => console.log("Server Listening on PORT 5000..."))

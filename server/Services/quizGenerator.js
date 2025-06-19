@@ -7,26 +7,37 @@ async function quizGenerator(noOfQuestions, questionTopics) {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                model: "google/gemma-3-4b-it:free",
+                // model: "deepseek/deepseek-r1-0528:free",
+                // model: "google/gemma-3-4b-it:free",
+                model: "google/gemma-3-27b-it:free",
                 messages: [
                     {
                         role: "user",
-                        content: `Generate ${noOfQuestions} multiple-choice questions (MCQs) on the topic ${questionTopics.join(', ')}. Each question should have 4 options (A, B, C, D), one correct answer, and a short explanation. Return the output in strict JSON format as follows:
-                        [
-                            {
-                                "question": "Your question here",
-                                "options": {
-                                    "A": "Option A",
-                                    "B": "Option B",
-                                    "C": "Option C",
-                                    "D": "Option D"
-                                },
-                                "answer": "B",
-                                "explanation": "Brief explanation of the correct answer.",
-                                "topic":"Topic related to the input user gave. Write it exactly as written by the user"
-                            }
-                        ]
-                        Only return the JSON array, nothing else.`
+                        content: `Generate ${noOfQuestions} multiple-choice questions (MCQs) on the topics: ${questionTopics.join(', ')}.
+                                    Each question should include:
+                                    - A "question" field
+                                    - An "options" object with 4 options labeled "A", "B", "C", and "D"
+                                    - An "answer" field with the correct option letter
+                                    - A short "explanation" of the correct answer
+                                    - A "topic" field that exactly matches one of the input topics provided
+                                    Return the output in **strict JSON format** as shown below (an array of question objects):
+                                    [
+                                    {
+                                        "question": "Your question here",
+                                        "options": {
+                                        "A": "Option A",
+                                        "B": "Option B",
+                                        "C": "Option C",
+                                        "D": "Option D"
+                                        },
+                                        "answer": "B",
+                                        "explanation": "Brief explanation of the correct answer.",
+                                        "topic": "One of the input topics, written exactly as provided by the user even if there is single topic then show that topic without rephrasing"
+                                    }
+                                    ]
+                                    Important:
+                                    - Only return the JSON array, nothing else (no text before or after).
+                                    - For each question, ensure the "topic" field is directly taken from the input list (e.g., if input includes 'topic-2', write 'topic-2' exactly — no rephrasing even if there is single topic then show that topic without rephrasing).`
                     }
                 ]
             })
@@ -46,7 +57,6 @@ async function quizGenerator(noOfQuestions, questionTopics) {
         if (match) {
             try {
                 const jsonData = JSON.parse(match[0]);
-                console.log("Parsed JSON:", jsonData);
                 return jsonData;
             } catch (err) {
                 console.error("Failed to parse extracted JSON:", err);
