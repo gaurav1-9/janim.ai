@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema({
     levelPoints: {
         type: Number,
         default: 0,
+    },
+    avatar: {
+        type: Number,
+        default: 0,
     }
 })
 

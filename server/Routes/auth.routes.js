@@ -59,7 +59,8 @@ router.post("/register", async (req, res) => {
             username: username.trim(),
             name: name.trim(),
             password: hashedPassword,
-            gender: gender
+            gender: gender,
+            avatar: 0
         })
         res.status(200).json({
             err: false,
