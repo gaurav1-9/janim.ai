@@ -3,6 +3,32 @@ const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 const UserModel = require("../Models/UserSchema")
 
+router.get("/", (req,res)=>{
+    const token = req.headers["authorization"]
+
+    if(!token){
+        return res.status(401).json({
+            err:true,
+            msg:"No token found"
+        })
+    }
+
+    try{
+        const decoded = jwt.verify(token,process.env.JWT_SECRET)
+        res.status(200).json({
+            err:false,
+            msg:"Authenticated",
+            user: decoded,
+        })
+    }catch(err){
+        return res.status(401).json({
+            err:true,
+            msg:"Invalid Token"
+        })
+    }
+})
+
+
 router.post("/register", async (req, res) => {
     const { name, username, password, gender } = req.body
 
@@ -79,12 +105,11 @@ router.post("/login", async (req, res) => {
                 gender: user.gender,
             },
             process.env.JWT_SECRET,
-            { expiresIn: "1h" }
+            { expiresIn: "1hr" }
         )
 
         res.status(200).json({
             err: false,
-            msg: "user loggedin",
             token: token,
         })
     } catch (err) {
