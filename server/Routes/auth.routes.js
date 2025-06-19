@@ -3,29 +3,36 @@ const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 const UserModel = require("../Models/UserSchema")
 
-router.get("/", (req,res)=>{
+const verifyToken = (req, res, next) => {
     const token = req.headers["authorization"]
 
-    if(!token){
+    if (!token) {
         return res.status(401).json({
-            err:true,
-            msg:"No token found"
+            err: true,
+            msg: "No token found",
+            navigateTo: "/auth/login"
         })
     }
 
-    try{
-        const decoded = jwt.verify(token,process.env.JWT_SECRET)
-        res.status(200).json({
-            err:false,
-            msg:"Authenticated",
-            user: decoded,
-        })
-    }catch(err){
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET)
+        req.user = decoded
+        next()
+    } catch (err) {
         return res.status(401).json({
-            err:true,
-            msg:"Invalid Token"
+            err: true,
+            msg: "Invalid Token",
+            navigateTo: "/auth/login"
         })
     }
+}
+
+router.get("/", verifyToken, (req, res) => {
+    res.status(200).json({
+        err: false,
+        msg: "Authenticated",
+        user: req.user,
+    });
 })
 
 
@@ -99,13 +106,9 @@ router.post("/login", async (req, res) => {
         const token = jwt.sign(
             {
                 userID: user._id,
-                username: user.username,
-                name: user.name,
-                levelPoints: user.levelPoints,
-                gender: user.gender,
             },
             process.env.JWT_SECRET,
-            { expiresIn: "1hr" }
+            { expiresIn: "1h" }
         )
 
         res.status(200).json({
@@ -120,4 +123,7 @@ router.post("/login", async (req, res) => {
     }
 })
 
-module.exports = router
+module.exports = {
+    AuthRoute: router,
+    verifyToken
+}
