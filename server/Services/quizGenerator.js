@@ -37,7 +37,9 @@ async function quizGenerator(noOfQuestions, questionTopics) {
                                     ]
                                     Important:
                                     - Only return the JSON array, nothing else (no text before or after).
-                                    - For each question, ensure the "topic" field is directly taken from the input list (e.g., if input includes 'topic-2', write 'topic-2' exactly — no rephrasing even if there is single topic then show that topic without rephrasing).`
+                                    - For each question, ensure the "topic" field is directly taken from the input list (e.g., if input includes 'topic-2', write 'topic-2' exactly — no rephrasing even if there is single topic then show that topic without rephrasing).
+                                    - Escape all inner double quotes inside strings properly (e.g., use \\\").
+                                    - Do not output any unescaped double quotes within values.`
                     }
                 ]
             })
@@ -47,16 +49,16 @@ async function quizGenerator(noOfQuestions, questionTopics) {
 
         if (!data.choices || !data.choices[0] || !data.choices[0].message) {
             console.error("Unexpected API response format");
-            return;
+            return -2;
         }
 
         const rawContent = data.choices[0].message.content;
 
-        const match = rawContent.match(/\[\s*[\s\S]+?\]/);
+        const match = rawContent.match(/\[\s*[\s\S]*\]/);
 
         if (match) {
             try {
-                const jsonData = JSON.parse(match[0]);
+                const jsonData = JSON.parse(match[0].trim());
                 return jsonData;
             } catch (err) {
                 console.error("Failed to parse extracted JSON:", err);

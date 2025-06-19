@@ -21,6 +21,12 @@ router.get("/generate", verifyToken, async (req, res) => {
                 msg: "Unable to fetch question"
             })
         }
+        if (questionList === -2) {
+            return res.status(429).json({
+                err: true,
+                msg: "Quota finished"
+            })
+        }
         res.status(200).json({
             err: false,
             msg: "working",

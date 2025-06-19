@@ -8,20 +8,20 @@ const InputArea = () => {
         {
             category: "I",
             points: "5",
-            time: "08 minutes",
-            questions: "05 to 10 Questions"
+            time: "60 seconds",
+            questions: "05 to 10"
         },
         {
             category: "II",
             points: "10",
-            time: "12 minutes",
-            questions: "11 to 15 Questions"
+            time: "75 seconds",
+            questions: "11 to 15"
         },
         {
             category: "III",
-            points: "20",
-            time: "20 minutes",
-            questions: "16 to 30 Questions"
+            points: "15",
+            time: "90 seconds",
+            questions: "16 to 20"
         }
     ]
 

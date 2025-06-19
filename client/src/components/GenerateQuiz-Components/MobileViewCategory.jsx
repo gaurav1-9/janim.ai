@@ -32,7 +32,7 @@ const MobileViewCategory = ({ category, changeCategory, tagList }) => {
             <div className="px-8 md:px-20 text-sm text-chineseViolet">
                 <div className="flex justify-between items-center border-2 rounded-xl px-4 py-2 mb-2">
                     <div>
-                        <p className='text-xl leading-4 font-semibold pt-2'>{category.questions}</p>
+                        <p className='text-xl leading-4 font-semibold pt-2'>{category.questions} Questions</p>
                         <p>{category.time}</p>
                     </div>
                     <div className='bg-chineseViolet text-ivory text-sm py-2 px-3 text-center rounded-lg font-semibold'>

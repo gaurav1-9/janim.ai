@@ -10,7 +10,7 @@ const DekstopViewCategory = ({ category, changeCategory, quizCategory }) => {
                     onClick={() => changeCategory(0)}
                 >
                     <div className={`${(category.category === 'I') ? 'text-pistachio' : 'text-chineseViolet'}`}>
-                        <p className='text-2xl font-semibold'>{quizCategory[0].questions}</p>
+                        <p className='text-2xl font-semibold'>{quizCategory[0].questions} Questions</p>
                         <p>{quizCategory[0].time}</p>
                     </div>
                     <div className={`${(category.category === 'I') ? 'bg-pistachio' : 'bg-chineseViolet'} py-1 px-2 rounded-lg flex flex-col items-center justify-center text-ivory font-semibold`}>
@@ -24,7 +24,7 @@ const DekstopViewCategory = ({ category, changeCategory, quizCategory }) => {
                     onClick={() => changeCategory(1)}
                 >
                     <div className={`${(category.category === 'II') ? 'text-pistachio' : 'text-chineseViolet'}`}>
-                        <p className='text-2xl font-semibold'>{quizCategory[1].questions}</p>
+                        <p className='text-2xl font-semibold'>{quizCategory[1].questions} Questions</p>
                         <p>{quizCategory[1].time}</p>
                     </div>
                     <div className={`${(category.category === 'II') ? 'bg-pistachio' : 'bg-chineseViolet'} py-1 px-2 rounded-lg flex flex-col items-center justify-center text-ivory font-semibold`}>
@@ -38,7 +38,7 @@ const DekstopViewCategory = ({ category, changeCategory, quizCategory }) => {
                     onClick={() => changeCategory(2)}
                 >
                     <div className={`${(category.category === 'III') ? 'text-pistachio' : 'text-chineseViolet'}`}>
-                        <p className='text-2xl font-semibold'>{quizCategory[2].questions}</p>
+                        <p className='text-2xl font-semibold'>{quizCategory[2].questions} Questions</p>
                         <p>{quizCategory[2].time}</p>
                     </div>
                     <div className={`${(category.category === 'III') ? 'bg-pistachio' : 'bg-chineseViolet'} py-1 px-2 rounded-lg flex flex-col items-center justify-center text-ivory font-semibold`}>
