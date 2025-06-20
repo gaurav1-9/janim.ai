@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const UserModel = require("../Models/UserSchema")
+const QuizModel = require("../Models/QuizSchema")
 const { verifyToken } = require("./auth.routes")
 const QuizGeneratorFunction = require("../Services/quizGenerator")
 
@@ -27,10 +27,14 @@ router.get("/generate", verifyToken, async (req, res) => {
                 msg: "Quota finished"
             })
         }
+        const updatedQuestionList = questionList.map(question => ({
+            ...question,
+            selectedOption: null
+        }));
         res.status(200).json({
             err: false,
             msg: "working",
-            questionList: questionList
+            questionList: updatedQuestionList
         })
     } catch (err) {
         return res.status(500).json({
@@ -38,6 +42,48 @@ router.get("/generate", verifyToken, async (req, res) => {
             msg: "Server Error"
         })
     }
+})
+
+router.post("/submit", verifyToken, async (req, res) => {
+    const userID = req.user.userID
+    const { quizDetails, totalQuizDuration, quizCompletionDuration, isCompleted, pointsEarned } = req.body
+
+    if (!quizDetails ||
+        typeof totalQuizDuration !== "number" ||
+        typeof quizCompletionDuration !== "number" ||
+        typeof isCompleted !== "boolean" ||
+        typeof pointsEarned !== "number"
+    ) {
+        return res.status(400).json({
+            err: true,
+            msg: "Missing quiz parameters"
+        })
+    }
+    try {
+        await QuizModel.create({
+            user: userID,
+            quizQuestions: quizDetails,
+            totalQuizDuration: totalQuizDuration,
+            quizCompletionDuration: quizCompletionDuration,
+            isCompleted: isCompleted,
+            pointsEarned: pointsEarned,
+        })
+        res.status(200).json({
+            err: false,
+            msg: "Quiz Submitted"
+        })
+    } catch (err) {
+        console.log(err)
+        return res.status(500).json({
+            err: true,
+            msg: "Server Error"
+        })
+    }
+})
+
+router.get("/show-quiz", verifyToken, async (req, res) => {
+    const quiz = await QuizModel.find({ user: req.user.userID });
+    res.json(quiz)
 })
 
 module.exports = router

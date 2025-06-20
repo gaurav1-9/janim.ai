@@ -1,4 +1,4 @@
-const {jsonrepair} = require("jsonrepair")
+const { jsonrepair } = require("jsonrepair")
 
 async function quizGenerator(noOfQuestions, questionTopics) {
     try {
@@ -26,13 +26,8 @@ async function quizGenerator(noOfQuestions, questionTopics) {
                                     [
                                     {
                                         "question": "Your question here",
-                                        "options": {
-                                        "A": "Option A",
-                                        "B": "Option B",
-                                        "C": "Option C",
-                                        "D": "Option D"
-                                        },
-                                        "answer": "B",
+                                        "options": ["Option A","Option B","Option C","Option D"],
+                                        "answer": array index of correct "option" in number,
                                         "explanation": "Brief explanation of the correct answer.",
                                         "topic": "One of the input topics, written exactly as provided by the user even if there is single topic then show that topic without rephrasing"
                                     }
@@ -66,7 +61,7 @@ async function quizGenerator(noOfQuestions, questionTopics) {
                     return jsonData;
                 } else {
                     console.error("Parsed JSON is not an array");
-                    return -1; // custom code for "not an array"
+                    return -1;
                 }
             } catch (err) {
                 console.error("Failed to parse extracted JSON:", err);

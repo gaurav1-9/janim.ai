@@ -23,7 +23,15 @@ const quizSchema = new mongoose.Schema({
     quizCompletionDuration: {
         type: Number,
         required: true,
+    },
+    isCompleted: {
+        type: Boolean,
+        required: true,
+    },
+    pointsEarned: {
+        type: Number,
+        required: true
     }
-})
+}, { timestamps: true })
 
 module.exports = mongoose.model("quizzes", quizSchema)
