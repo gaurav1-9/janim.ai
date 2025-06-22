@@ -8,6 +8,7 @@ const baseURL = import.meta.env.VITE_BASE_URL
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [avatar, setAvatar] = useState({ isDisplay: false, avatarID: null })
+    const [avatarSelection, setAvatarSelection] = useState(false)
     useEffect(() => {
         const checkAuth = async () => {
             const token = localStorage.getItem("token");
@@ -42,7 +43,6 @@ const Navbar = () => {
             }
         )
     }
-    console.log(avatar.gender + "_Av" + avatar.avatarID)
     return (
         <div className="px-8 py-5 md:px-20 xl:px-40 lg:py-10 sticky top-0 w-full flex justify-between items-center bg-seaSalt pb-3 z-50">
             <Link to='/' className='cursor-default'>
@@ -60,13 +60,42 @@ const Navbar = () => {
                 <Link to='/generate'><p className='text-chineseViolet cursor-pointer text-2xl hover:underline underline-offset-8'>Generate</p></Link>
                 {
                     (avatar.isDisplay)
-                        ? <>
-                            <Link className='border-2 rounded-full p-0.5 hover:border-dashed border-chineseViolet/0 hover:border-chineseViolet/40 duration-300 ease-in-out'>
+                        ? <div className='relative'>
+                            <div
+                                className={`flex justify-center items-center z-10 border-3 rounded-full p-0.5 ${avatarSelection
+                                    ? "border-dashed border-chineseViolet/40"
+                                    : "hover:border-chineseViolet/40"
+                                    } border-dashed border-chineseViolet/0 duration-300 ease-in-out`}
+                                onClick={() => setAvatarSelection(!avatarSelection)}
+                                title='Clcik me'
+                            >
                                 <div className="w-20 h-20 border-4 border-chineseViolet rounded-full overflow-clip cursor-pointer">
-                                    <img src={`/Avatars/Square_Images/${avatar.gender}_Av${avatar.avatarID}.png`} alt="" />
+                                    <img
+                                        src={`/Avatars/Square_Images/${avatar.gender}_Av${avatar.avatarID}.png`}
+                                        alt="profilePic"
+                                        draggable="false"
+                                    />
                                 </div>
-                            </Link>
-                        </>
+                            </div>
+
+                            <div
+                                className={`z-10 flex flex-col gap-2 bg-seaSalt absolute right-0 rounded-xl p-2 shadow-[0_0_17px_rgba(0,0,0,0.25)] transition-all duration-300 ease-in-out ${avatarSelection
+                                    ? "top-24 opacity-100 pointer-events-auto"
+                                    : "top-20 opacity-0 pointer-events-none"
+                                    }`}
+                            >
+                                <p className="text-2xl cursor-pointer rounded-lg hover:bg-chineseViolet/10 py-2 px-4 pr-10 text-chineseViolet">
+                                    Profile
+                                </p>
+                                <p
+                                    className="text-2xl cursor-pointer rounded-lg hover:bg-chineseViolet/10 py-2 px-4 pr-10 text-chineseViolet"
+                                    onClick={logout}
+                                >
+                                    Logout
+                                </p>
+                            </div>
+                        </div>
+
                         : <div className='flex gap-4'>
                             <Buttons bgColor='bg-chineseViolet hover:bg-chineseViolet/90 hover:border-chineseViolet/0' width='' textColor='text-ivory' text='Sign In' goTo='/auth/login' otherResponsiveStyles='px-5 py-1' />
                             <Buttons bgColor='bg-seaSalt hover:border-chineseViolet/90 hover:border-chineseViolet/90' width='' textColor='text-chineseViolet' text='Sign Up' goTo='/auth/register' otherResponsiveStyles='px-5 py-1' />
