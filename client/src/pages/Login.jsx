@@ -52,7 +52,7 @@ const Login = () => {
       const res = await axios.post(`${baseURL}/auth/login`, { username, password })
       if (!res.data.err) {
         localStorage.setItem("token", res.data.token)
-        console.log('Log in done')
+        navigate("/", { replace: true })
       }
 
     } catch (err) {
@@ -98,12 +98,12 @@ const Login = () => {
           />
           <div
             className="rounded-full bg-chineseViolet h-5 w-5 absolute right-2 top-4 cursor-pointer"
-            onMouseDown={() => passRef.current.type = "text"}
-            onMouseUp={() => passRef.current.type = "password"}
+            onPointerDown={() => passRef.current.type = "text"}
+            onPointerUp={() => passRef.current.type = "password"}
           ></div>
         </div>
         <div className='relative'>
-          <p className={`mb-1 absolute leading-3 lg:leading-5 text-sm lg:text-base font-semibold text-lightRed/70 ${(serverMsg.err) ? 'opacity-100 top-0' : 'opacity-0 bg-seaSalt -top-2'} transition-all duration-300 ease-in-out`}>{serverMsg.msg}</p>
+          <p className={`mb-1 absolute leading-3 lg:leading-5 text-sm lg:text-base font-semibold text-lightRed/70 ${(serverMsg.err) ? 'opacity-100 top-0' : 'opacity-0 bg-seaSalt -top-2'} transition-all duration-300 ease-in-out capitalize`}>{serverMsg.msg}</p>
           <p className={`mb-1 absolute leading-3 lg:leading-5 text-sm lg:text-base font-semibold text-lightRed/70 ${(emptyInputs) ? 'opacity-100 top-0' : 'opacity-0 bg-seaSalt -top-2'} transition-all duration-300 ease-in-out`}>All input fields are necessary</p>
         </div>
         <button

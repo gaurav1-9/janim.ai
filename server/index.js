@@ -13,10 +13,10 @@ const connectToDB = require("./config/config_DB")
 connectToDB();
 
 const corsOptions = {
-  origin: 'http://localhost:5173',   // your React app
-  credentials: true,                 // allow cookies, sessions if used
+  origin: ['http://localhost:5173','http://192.168.27.160:5173'], // Change to process.env.CLIENT_URL
+  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'] // must include Authorization
+  allowedHeaders: ['Content-Type', 'Authorization']
 };
 
 const app = express()
@@ -32,4 +32,4 @@ app.use("/api/auth", AuthRoute)
 app.use("/api/users", UserRoute)
 app.use("/api/quiz", QuizRoute)
 
-app.listen(5000, () => console.log("Server Listening on PORT 5000..."))
+app.listen(5000, '0.0.0.0', () => console.log("Server Listening on PORT 5000..."))
