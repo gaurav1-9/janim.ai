@@ -12,7 +12,15 @@ const QuizRoute = require("./Routes/quiz.routes")
 const connectToDB = require("./config/config_DB")
 connectToDB();
 
+const corsOptions = {
+  origin: 'http://localhost:5173',   // your React app
+  credentials: true,                 // allow cookies, sessions if used
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'] // must include Authorization
+};
+
 const app = express()
+app.use(cors(corsOptions));
 app.set("view engine", "ejs")
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
