@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { LuMenu } from "react-icons/lu";
-import { Link, Links } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Buttons from './Buttons';
 import axios from 'axios';
 const baseURL = import.meta.env.VITE_BASE_URL
@@ -9,6 +9,7 @@ const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [avatar, setAvatar] = useState({ isDisplay: false, avatarID: null })
     const [avatarSelection, setAvatarSelection] = useState(false)
+    const avatarSection = useRef(null)
     useEffect(() => {
         const checkAuth = async () => {
             const token = localStorage.getItem("token");
@@ -33,6 +34,21 @@ const Navbar = () => {
 
         checkAuth();
     }, []);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (avatarSection.current && !avatarSection.current.contains(event.target)) {
+                setAvatarSelection(false); // 👈 close the menu
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
     const logout = () => {
         localStorage.removeItem('token')
         setIsMenuOpen(false)
@@ -42,6 +58,7 @@ const Navbar = () => {
                 avatarID: null
             }
         )
+        setAvatarSelection(false)
     }
     return (
         <div className="px-8 py-5 md:px-20 xl:px-40 lg:py-10 sticky top-0 w-full flex justify-between items-center bg-seaSalt pb-3 z-50">
@@ -60,7 +77,7 @@ const Navbar = () => {
                 <Link to='/generate'><p className='text-chineseViolet cursor-pointer text-2xl hover:underline underline-offset-8'>Generate</p></Link>
                 {
                     (avatar.isDisplay)
-                        ? <div className='relative'>
+                        ? <div className='relative' ref={avatarSection}>
                             <div
                                 className={`flex justify-center items-center z-10 border-3 rounded-full p-0.5 ${avatarSelection
                                     ? "border-dashed border-chineseViolet/40"
@@ -84,9 +101,11 @@ const Navbar = () => {
                                     : "top-20 opacity-0 pointer-events-none"
                                     }`}
                             >
-                                <p className="text-2xl cursor-pointer rounded-lg hover:bg-chineseViolet/10 py-2 px-4 pr-10 text-chineseViolet">
-                                    Profile
-                                </p>
+                                <Link onClick={() => setAvatarSelection(false)} >
+                                    <p className="text-2xl cursor-pointer rounded-lg hover:bg-chineseViolet/10 py-2 px-4 pr-10 text-chineseViolet">
+                                        Profile
+                                    </p>
+                                </Link>
                                 <p
                                     className="text-2xl cursor-pointer rounded-lg hover:bg-chineseViolet/10 py-2 px-4 pr-10 text-chineseViolet"
                                     onClick={logout}
@@ -111,7 +130,7 @@ const Navbar = () => {
                     {
                         (avatar.isDisplay)
                             ? <>
-                                <Link>
+                                <Link onClick={() => setIsMenuOpen(false)}>
                                     <div className="w-18 h-18 border-3 border-chineseViolet rounded-full overflow-clip">
                                         <img src={`/Avatars/Square_Images/${avatar.gender}_Av${avatar.avatarID}.png`} alt="" />
                                     </div>
