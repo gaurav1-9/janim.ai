@@ -108,6 +108,7 @@ router.post("/login", async (req, res) => {
             {
                 userID: user._id,
                 avatar: user.avatar,
+                gender: user.gender,
             },
             process.env.JWT_SECRET,
             { expiresIn: "10m" } //************************change the time to 1h***************
