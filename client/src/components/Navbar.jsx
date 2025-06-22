@@ -101,7 +101,7 @@ const Navbar = () => {
                                     : "top-20 opacity-0 pointer-events-none"
                                     }`}
                             >
-                                <Link onClick={() => setAvatarSelection(false)} >
+                                <Link to='/profile' onClick={() => setAvatarSelection(false)} >
                                     <p className="text-2xl cursor-pointer rounded-lg hover:bg-chineseViolet/10 py-2 px-4 pr-10 text-chineseViolet">
                                         Profile
                                     </p>
@@ -130,7 +130,7 @@ const Navbar = () => {
                     {
                         (avatar.isDisplay)
                             ? <>
-                                <Link onClick={() => setIsMenuOpen(false)}>
+                                <Link to='/profile' onClick={() => setIsMenuOpen(false)}>
                                     <div className="w-18 h-18 border-3 border-chineseViolet rounded-full overflow-clip">
                                         <img src={`/Avatars/Square_Images/${avatar.gender}_Av${avatar.avatarID}.png`} alt="" />
                                     </div>

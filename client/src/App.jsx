@@ -6,6 +6,7 @@ import Navbar from './components/Navbar'
 import AuthLayout from './pages/AuthLayout'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import Profile from './pages/Profile'
 
 const App = () => {
   const topRef = useRef(null);
@@ -22,6 +23,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/generate' element={<GenerateQuiz />} />
+        <Route path='/profile' element={<Profile />} />
 
         <Route path='/auth' element={<AuthLayout />}>
           <Route index element={<Navigate to="login" replace />} />
