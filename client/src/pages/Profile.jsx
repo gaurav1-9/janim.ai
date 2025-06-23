@@ -1,8 +1,30 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+import DataContext from "../context/DataContext";
+import { useNavigate } from 'react-router-dom';
+import Footer from "../components/Footer";
+import UserDetails from '../components/Profile/UserDetails';
 
 const Profile = () => {
+  const navigate = useNavigate();
+  const { user, setUser } = useContext(DataContext)
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/auth/login", { replace: true })
+    }
+  }, [user, navigate])
+
+  const editProfile = () => {
+    // setUser will be used here
+    console.log('Edit Click')
+  }
+
+  if (!user) return null;
   return (
-    <div>Profile</div>
+    <div>
+      <UserDetails user={user} editProfile={editProfile} />
+      <Footer />
+    </div>
   )
 }
 

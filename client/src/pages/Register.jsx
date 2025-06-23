@@ -28,7 +28,7 @@ const Register = () => {
     setRegisterLoad(true)
 
     try {
-      const res = await axios.post(`${baseURL}/auth/register`, { name, gender, username, password })
+      await axios.post(`${baseURL}/auth/register`, { name, gender, username, password })
       navigate("/auth/login", {
         replace: true,
         state: {
