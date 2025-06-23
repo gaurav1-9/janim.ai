@@ -31,7 +31,7 @@ const Navbar = () => {
         setAvatarSelection(false)
     }
     return (
-        <div className="px-8 py-5 md:px-20 xl:px-40 lg:py-10 sticky top-0 w-full flex justify-between items-center bg-seaSalt pb-3 z-50">
+        <div className="px-8 py-5 md:px-20 xl:px-40 lg:py-7 sticky top-0 w-full flex justify-between items-center bg-seaSalt pb-3 z-50">
             <Link to='/' className='cursor-default'>
                 <img src="/Logo/Logo.png" alt="Logo" className='w-35 lg:w-60' draggable='false' />
             </Link>
