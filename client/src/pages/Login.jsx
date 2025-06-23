@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { PulseLoader } from 'react-spinners'
 import axios from 'axios'
+import DataContext from '../context/DataContext'
 const baseURL = import.meta.env.VITE_BASE_URL
 
 const Login = () => {
@@ -14,9 +15,10 @@ const Login = () => {
   const passRef = useRef(null)
   const [emptyInputs, setEmptyInputs] = useState(false)
   const [serverMsg, setServerMsg] = useState({})
+  const { checkAuth } = useContext(DataContext)
 
   useEffect(() => {
-    const checkAuth = async () => {
+    const loginAuth = async () => {
       const token = localStorage.getItem("token");
       if (!token) return
       try {
@@ -26,6 +28,7 @@ const Login = () => {
           }
         });
         if (!userAuth.data.err) {
+          await checkAuth();
           navigate("/", { replace: true })
         }
 
@@ -35,7 +38,7 @@ const Login = () => {
     };
 
 
-    checkAuth();
+    loginAuth();
   }, []);
 
   useEffect(() => {
@@ -48,7 +51,7 @@ const Login = () => {
         setTimeout(() => {
           setRegisterMsg({});
         }, 300);
-      }, 5000);
+      }, 3000);
 
       return () => clearTimeout(timer);
     }
@@ -71,6 +74,7 @@ const Login = () => {
       const res = await axios.post(`${baseURL}/auth/login`, { username, password })
       if (!res.data.err) {
         localStorage.setItem("token", res.data.token)
+        await checkAuth();
         navigate("/", { replace: true })
       }
 

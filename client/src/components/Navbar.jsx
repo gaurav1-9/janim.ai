@@ -1,44 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { LuMenu } from "react-icons/lu";
 import { Link } from 'react-router-dom';
 import Buttons from './Buttons';
-import axios from 'axios';
-const baseURL = import.meta.env.VITE_BASE_URL
+import DataContext from '../context/DataContext';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [avatar, setAvatar] = useState({ isDisplay: false, avatarID: null })
     const [avatarSelection, setAvatarSelection] = useState(false)
     const avatarSection = useRef(null)
-    useEffect(() => {
-        const checkAuth = async () => {
-            const token = localStorage.getItem("token");
-            if (!token) return
-            try {
-                const userAuth = await axios.get(`${baseURL}/auth/`, {
-                    headers: {
-                        Authorization: token
-                    }
-                });
-                if (!userAuth.data.err) {
-                    setAvatar({
-                        isDisplay: true,
-                        avatarID: userAuth.data.user.avatar,
-                        gender: userAuth.data.user.gender
-                    })
-                }
-            } catch (err) {
-                localStorage.removeItem("token")
-            }
-        };
-
-        checkAuth();
-    }, []);
+    const { user, setUser } = useContext(DataContext)
 
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (avatarSection.current && !avatarSection.current.contains(event.target)) {
-                setAvatarSelection(false); // 👈 close the menu
+                setAvatarSelection(false);
             }
         };
 
@@ -51,13 +26,8 @@ const Navbar = () => {
 
     const logout = () => {
         localStorage.removeItem('token')
+        setUser(null)
         setIsMenuOpen(false)
-        setAvatar(
-            {
-                isDisplay: false,
-                avatarID: null
-            }
-        )
         setAvatarSelection(false)
     }
     return (
@@ -76,7 +46,7 @@ const Navbar = () => {
                 <Link to='/'><p className='text-chineseViolet cursor-pointer text-2xl hover:underline underline-offset-8'>Home</p></Link>
                 <Link to='/generate'><p className='text-chineseViolet cursor-pointer text-2xl hover:underline underline-offset-8'>Generate</p></Link>
                 {
-                    (avatar.isDisplay)
+                    (user)
                         ? <div className='relative' ref={avatarSection}>
                             <div
                                 className={`flex justify-center items-center z-10 border-3 rounded-full p-0.5 ${avatarSelection
@@ -88,7 +58,7 @@ const Navbar = () => {
                             >
                                 <div className="w-20 h-20 border-4 border-chineseViolet rounded-full overflow-clip cursor-pointer">
                                     <img
-                                        src={`/Avatars/Square_Images/${avatar.gender}_Av${avatar.avatarID}.png`}
+                                        src={`/Avatars/Square_Images/${user.gender}_Av${user.avatar}.png`}
                                         alt="profilePic"
                                         draggable="false"
                                     />
@@ -128,11 +98,11 @@ const Navbar = () => {
                     <Link to='/' className='w-fit' onClick={() => setIsMenuOpen(false)}><p className='text-chineseViolet text-xl'>Home</p></Link>
                     <Link to='/generate' className='w-fit' onClick={() => setIsMenuOpen(false)}><p className='text-chineseViolet text-xl'>Generate</p></Link>
                     {
-                        (avatar.isDisplay)
+                        (user)
                             ? <>
                                 <Link to='/profile' onClick={() => setIsMenuOpen(false)}>
                                     <div className="w-18 h-18 border-3 border-chineseViolet rounded-full overflow-clip">
-                                        <img src={`/Avatars/Square_Images/${avatar.gender}_Av${avatar.avatarID}.png`} alt="" />
+                                        <img src={`/Avatars/Square_Images/${user.gender}_Av${user.avatar}.png`} alt="" />
                                     </div>
                                 </Link>
                                 <p onClick={logout} className='w-fit text-chineseViolet text-xl'>Logout</p>
