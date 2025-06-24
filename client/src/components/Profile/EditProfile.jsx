@@ -3,6 +3,7 @@ import DataContext from '../../context/DataContext'
 import AvatarSelection from './AvatarSelection';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../Loader';
+import ProfileTextEditing from './ProfileTextEditing';
 
 const EditProfile = () => {
     const navigate = useNavigate();
@@ -29,10 +30,9 @@ const EditProfile = () => {
             {
                 (!userAvatar)
                     ? <Loader />
-                    : <div className='px-8 py-5 md:px-20 xl:px-40 lg:py-10 flex gap-3 md:gap-5 items-center justify-center md:justify-start'>
-                        {/* Avatar Selection */}
+                    : <div className='px-8 py-5 md:px-20 xl:px-40 lg:py-10 flex flex-col gap-3 md:gap-5 items-center justify-center md:justify-start'>
                         <AvatarSelection userAvatar={userAvatar} selectAvatar={selectAvatar} avatarList={avatarList} />
-
+                        <ProfileTextEditing />
                     </div>
             }
         </>
