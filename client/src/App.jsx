@@ -9,6 +9,7 @@ import Register from './pages/Register'
 import Profile from './pages/Profile'
 import DataContext from './context/DataContext'
 import Loader from './components/Loader'
+import EditProfile from './components/Profile/EditProfile';
 
 const App = () => {
   const topRef = useRef(null);
@@ -33,6 +34,7 @@ const App = () => {
               <Route path='/' element={<Home />} />
               <Route path='/generate' element={<GenerateQuiz />} />
               <Route path='/profile' element={<Profile />} />
+              <Route path='/edit-profile' element={<EditProfile />} />
 
               <Route path='/auth' element={<AuthLayout />}>
                 <Route index element={<Navigate to="login" replace />} />

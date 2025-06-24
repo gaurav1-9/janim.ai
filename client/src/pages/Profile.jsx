@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import DataContext from "../context/DataContext";
 import { useNavigate } from 'react-router-dom';
 import Footer from "../components/Footer";
@@ -14,15 +14,15 @@ const Profile = () => {
     }
   }, [user, navigate])
 
-  const editProfile = () => {
+  const navigateToEditProfile = () => {
     // setUser & checkAuth will be used here
-    console.log('Edit Click')
+    navigate("/edit-profile")
   }
 
   if (!user) return null;
   return (
     <div>
-      <UserDetails user={user} editProfile={editProfile} />
+      <UserDetails user={user} editProfile={navigateToEditProfile}/>
       <Footer />
     </div>
   )
