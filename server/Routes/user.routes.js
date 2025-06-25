@@ -78,6 +78,7 @@ router.patch("/edit", verifyToken, async (req, res) => {
     });
 
   } catch (err) {
+    console.log(userID+" /users/edit: "+err)
     res.status(500).json({
       err: true,
       msg: "Server error"

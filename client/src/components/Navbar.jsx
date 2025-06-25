@@ -58,7 +58,7 @@ const Navbar = () => {
                             >
                                 <div className="w-20 h-20 border-4 border-chineseViolet rounded-full overflow-clip cursor-pointer">
                                     <img
-                                        src={`/Avatars/Square_Images/${user.gender}_Av${user.avatar}.png`}
+                                        src={`/Avatars/Square_Images/${user.avatar}.png`}
                                         alt="profilePic"
                                         draggable="false"
                                     />
@@ -102,7 +102,7 @@ const Navbar = () => {
                             ? <>
                                 <Link to='/profile' onClick={() => setIsMenuOpen(false)}>
                                     <div className="w-18 h-18 border-3 border-chineseViolet rounded-full overflow-clip">
-                                        <img src={`/Avatars/Square_Images/${user.gender}_Av${user.avatar}.png`} alt="" />
+                                        <img src={`/Avatars/Square_Images/${user.avatar}.png`} alt="" />
                                     </div>
                                 </Link>
                                 <p onClick={logout} className='w-fit text-chineseViolet text-xl'>Logout</p>

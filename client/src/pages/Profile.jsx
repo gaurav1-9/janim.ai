@@ -6,7 +6,7 @@ import UserDetails from '../components/Profile/UserDetails';
 
 const Profile = () => {
   const navigate = useNavigate();
-  const { user, setUser, checkAuth } = useContext(DataContext)
+  const { user, checkAuth } = useContext(DataContext)
 
   useEffect(() => {
     if (!user) {
@@ -22,7 +22,7 @@ const Profile = () => {
   if (!user) return null;
   return (
     <div>
-      <UserDetails user={user} editProfile={navigateToEditProfile}/>
+      <UserDetails user={user} editProfile={navigateToEditProfile} />
       <Footer />
     </div>
   )

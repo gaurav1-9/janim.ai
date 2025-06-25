@@ -15,7 +15,7 @@ connectToDB();
 const corsOptions = {
   origin: ['http://localhost:5173','http://192.168.27.160:5173'],   // Change to process.env.CLIENT_URL
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 };
 
