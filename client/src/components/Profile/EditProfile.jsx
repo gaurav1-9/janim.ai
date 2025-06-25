@@ -13,7 +13,7 @@ const EditProfile = () => {
     const avatarList = ['female_Av0', 'female_Av1', 'female_Av2', 'female_Av3', 'male_Av0', 'male_Av1', 'male_Av2', 'male_Av3',]
     const { user, checkAuth } = useContext(DataContext)
     const [userAvatar, setUserAvatar] = useState(null)
-    const [editedUser, setEditedUser] = useState({ name: user.name, username: user.username, gender: user.gender })
+    const [editedUser, setEditedUser] = useState({})
     const [isEditting, setIsEditting] = useState(false)
     const [emptyInputs, setEmptyInputs] = useState(false)
     const [serverMsg, setServerMsg] = useState({})
@@ -23,10 +23,11 @@ const EditProfile = () => {
             navigate("/auth/login", { replace: true })
         }
         else {
-            setUserAvatar(user.avatar)
+            setUserAvatar(user.gender + "_Av" + user.avatar)
+            setEditedUser({ name: user.name, username: user.username, gender: user.gender, avatar:  user.avatar})
         }
     }, [user, navigate])
-
+    
     const selectAvatar = (i) => {
         setUserAvatar(avatarList[i])
     }
@@ -45,7 +46,7 @@ const EditProfile = () => {
         try {
             const token = localStorage.getItem("token");
             await axios.patch(`${baseURL}/users/edit`,
-                { ...editedUser, avatar: userAvatar },
+                { ...editedUser, avatar: userAvatar[userAvatar.length - 1] },
                 {
                     headers: {
                         Authorization: token
@@ -54,7 +55,6 @@ const EditProfile = () => {
             )
             await checkAuth()
             navigate("/profile", { replace: true })
-            console.log(editedUser)
         } catch (err) {
             console.log(err)
             setServerMsg(err.response.data)
@@ -72,7 +72,6 @@ const EditProfile = () => {
             setIsEditting(false)
         }
     }
-
     if (!user) return null;
     return (
         <>
@@ -82,7 +81,7 @@ const EditProfile = () => {
                     : <>
                         <div className='px-8 py-5 md:px-20 xl:px-40 lg:py-10 flex flex-col md:flex-row gap-3 md:gap-5 items-center justify-center md:justify-start'>
                             <AvatarSelection userAvatar={userAvatar} selectAvatar={selectAvatar} avatarList={avatarList} gender={editedUser.gender} />
-                            <ProfileTextEditing editedUser={editedUser} setEditedUser={setEditedUser} emptyInputs={emptyInputs} serverMsg={serverMsg} isEditting={isEditting} fullProfileEdit={fullProfileEdit} />
+                            <ProfileTextEditing editedUser={editedUser} setEditedUser={setEditedUser} emptyInputs={emptyInputs} serverMsg={serverMsg} isEditting={isEditting} fullProfileEdit={fullProfileEdit} setUserAvatar={setUserAvatar} />
                         </div>
                         <Footer />
                     </>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { PulseLoader } from 'react-spinners'
 
-const ProfileTextEditing = ({ editedUser, isEditting, serverMsg, emptyInputs, fullProfileEdit, setEditedUser }) => {
+const ProfileTextEditing = ({ editedUser, isEditting, serverMsg, emptyInputs, fullProfileEdit, setEditedUser, setUserAvatar }) => {
 
   return (
     <div className='flex flex-col w-full md:w-3/5'>
@@ -49,10 +49,14 @@ const ProfileTextEditing = ({ editedUser, isEditting, serverMsg, emptyInputs, fu
                 } px-2 py-3 border-[1.5px] md:border-[1.8px] lg:border-2 border-chineseViolet rounded-lg`}
               value={editedUser.gender}
               disabled={isEditting}
-              onChange={(e) => setEditedUser(prev => ({
-                ...prev,
-                gender: e.target.value.toLowerCase()
-              }))
+              onChange={(e) => {
+                const editedGender = e.target.value.toLowerCase()
+                setEditedUser(prev => ({
+                  ...prev,
+                  gender: editedGender
+                }))
+                setUserAvatar(`${editedGender}_Av0`)
+              }
               }
             >
               <option value="" disabled hidden>

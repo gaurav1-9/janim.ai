@@ -6,7 +6,7 @@ import UserDetails from '../components/Profile/UserDetails';
 
 const Profile = () => {
   const navigate = useNavigate();
-  const { user, checkAuth } = useContext(DataContext)
+  const { user } = useContext(DataContext)
 
   useEffect(() => {
     if (!user) {
@@ -15,7 +15,6 @@ const Profile = () => {
   }, [user, navigate])
 
   const navigateToEditProfile = () => {
-    // setUser & checkAuth will be used here
     navigate("/edit-profile")
   }
 
