@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { PulseLoader } from 'react-spinners'
 import axios from 'axios'
 import DataContext from '../context/DataContext'
+import ToasterMsg from '../components/ToasterMsg'
 const baseURL = import.meta.env.VITE_BASE_URL
 
 const Login = () => {
@@ -99,10 +100,7 @@ const Login = () => {
 
   return (
     <>
-      <div className={`flex ${(registerMsg.status) ? 'top-10 opacity-100' : 'opacity-0 top-0'} w-60 lg:w-70 flex-col absolute right-1/2 translate-x-1/2 bg-seaSalt px-3 lg:px-5 py-2 lg:py-4 rounded-lg lg:rounded-xl shadow-[0_0_10px_rgba(0,0,0,0.25)] overflow-clip duration-300 ease-in-out`}>
-        <p className='text-center text-eerieBlack/70 font-semibold mb-1 text-sm lg:text-base'>{registerMsg.msg}</p>
-        <div className='bg-pistachio w-full h-4 absolute -bottom-2.5 lg:-bottom-2 right-0'></div>
-      </div>
+      <ToasterMsg toaster={registerMsg}/>
       <form
         className='flex flex-col justify-center gap-2 w-full px-7 lg:px-3'
         onSubmit={checkLogin}

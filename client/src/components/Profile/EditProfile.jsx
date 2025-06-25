@@ -24,10 +24,10 @@ const EditProfile = () => {
         }
         else {
             setUserAvatar(user.gender + "_Av" + user.avatar)
-            setEditedUser({ name: user.name, username: user.username, gender: user.gender, avatar:  user.avatar})
+            setEditedUser({ name: user.name, username: user.username, gender: user.gender, avatar: user.avatar })
         }
     }, [user, navigate])
-    
+
     const selectAvatar = (i) => {
         setUserAvatar(avatarList[i])
     }
@@ -54,9 +54,14 @@ const EditProfile = () => {
                 }
             )
             await checkAuth()
-            navigate("/profile", { replace: true })
+            navigate("/profile", {
+                replace: true,
+                state: {
+                    status: true,
+                    msg: 'Profile updated successfully'
+                }
+            })
         } catch (err) {
-            console.log(err)
             setServerMsg(err.response.data)
             setTimeout(() => {
                 setServerMsg(prev => ({
