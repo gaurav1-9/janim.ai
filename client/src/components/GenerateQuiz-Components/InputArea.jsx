@@ -1,9 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import TagInput from './TagInput';
 import CategoryBranch from './CategoryBranch';
 import QuizCategory from './QuizCategory';
 import DataContext from '../../context/DataContext'
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
+
+const baseURL = import.meta.env.VITE_BASE_URL
 
 const InputArea = () => {
     const navigate = useNavigate()
@@ -74,7 +77,7 @@ const InputArea = () => {
         setTags(tags.filter((_, index) => index !== indexToRemove));
     };
 
-    const tagList = () => {
+    const tagList = async () => {
         if (!user) {
             navigate("/auth/login", { replace: true })
             return
@@ -105,7 +108,22 @@ const InputArea = () => {
         }
 
         try {
-            sa
+            const token = localStorage.getItem("token")
+            const quizResponse = await axios.get(
+                `${baseURL}/quiz/generate?qNo=${userInput.questions}&t=${userInput.tags}`,
+                {
+                    headers: {
+                        Authorization: token
+                    }
+                }
+            )
+            console.log(quizResponse.data)
+            navigate("/quiz",{
+                state:{
+                    status: true,
+                    quizList: quizResponse.data.questionList
+                }
+            })
         } catch (err) {
             console.log(err)
             setInperr({
