@@ -8,21 +8,27 @@ const MobileViewCategory = ({ category, changeCategory, tagList, isGenerating })
             <div className="mt-11 flex justify-center items-center w-full gap-11 md:gap-21 min-[425px]:gap-17 min-[375px]:gap-13 min-[425px]:pt-1 md:pt-4">
                 <div
                     className={`flex flex-col justify-center items-center p-2 w-17 ${(category.category === 'I') ? 'bg-pistachio' : 'bg-chineseViolet'} text-ivory rounded-lg`}
-                    onClick={() => changeCategory(0)}
+                    onClick={() => {
+                        if (!isGenerating) changeCategory(0)
+                    }}
                 >
                     <p className='text-xs'>Category</p>
                     <p className='text-3xl font-semibold'>I</p>
                 </div>
                 <div
                     className={`flex flex-col justify-center items-center p-2 w-17 ${(category.category === 'II') ? 'bg-pistachio' : 'bg-chineseViolet'} text-ivory rounded-lg`}
-                    onClick={() => changeCategory(1)}
+                    onClick={() => {
+                        if (!isGenerating) changeCategory(1)
+                    }}
                 >
                     <p className='text-xs'>Category</p>
                     <p className='text-3xl font-semibold'>II</p>
                 </div>
                 <div
                     className={`flex flex-col justify-center items-center p-2 w-17 ${(category.category === 'III') ? 'bg-pistachio' : 'bg-chineseViolet'} text-ivory rounded-lg`}
-                    onClick={() => changeCategory(2)}
+                    onClick={() => {
+                        if (!isGenerating) changeCategory(2)
+                    }}
                 >
                     <p className='text-xs'>Category</p>
                     <p className='text-3xl font-semibold'>III</p>

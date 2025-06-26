@@ -1,13 +1,15 @@
 import React from 'react'
 
-const DekstopViewCategory = ({ category, changeCategory, quizCategory }) => {
+const DekstopViewCategory = ({ category, changeCategory, quizCategory, isGenerating }) => {
     return (
         <div className="hidden lg:flex flex-col pl-15 absolute -top-36">
             <p className='text-lg text-chineseViolet pb-1'>Question Categories...</p>
             <div className="flex flex-col gap-10">
                 <div
                     className={`px-5 xl:w-100 min-[1024px]:w-90 py-3 rounded-xl flex justify-between items-center border-3 ${(category.category === 'I') ? 'border-pistachio' : 'border-chineseViolet hover:scale-[1.02] hover:shadow-md'} ease-in-out duration-200 cursor-pointer`}
-                    onClick={() => changeCategory(0)}
+                    onClick={() => {
+                        if (!isGenerating) changeCategory(0)
+                    }}
                 >
                     <div className={`${(category.category === 'I') ? 'text-pistachio' : 'text-chineseViolet'}`}>
                         <p className='text-2xl font-semibold'>{quizCategory[0].questions} Questions</p>
@@ -21,7 +23,9 @@ const DekstopViewCategory = ({ category, changeCategory, quizCategory }) => {
 
                 <div
                     className={`px-5 xl:w-100 min-[1024px]:w-90 py-3 rounded-xl flex justify-between items-center border-3 ${(category.category === 'II') ? 'border-pistachio' : 'border-chineseViolet hover:scale-[1.02] hover:shadow-md'} ease-in-out duration-200 cursor-pointer`}
-                    onClick={() => changeCategory(1)}
+                    onClick={() => {
+                        if (!isGenerating) changeCategory(1)
+                    }}
                 >
                     <div className={`${(category.category === 'II') ? 'text-pistachio' : 'text-chineseViolet'}`}>
                         <p className='text-2xl font-semibold'>{quizCategory[1].questions} Questions</p>
@@ -35,7 +39,9 @@ const DekstopViewCategory = ({ category, changeCategory, quizCategory }) => {
 
                 <div
                     className={`px-5 xl:w-100 min-[1024px]:w-90 py-3 rounded-xl flex justify-between items-center border-3 ${(category.category === 'III') ? 'border-pistachio' : 'border-chineseViolet hover:scale-[1.02] hover:shadow-md'} ease-in-out duration-200 cursor-pointer`}
-                    onClick={() => changeCategory(2)}
+                    onClick={() => {
+                        if (!isGenerating) changeCategory(2)
+                    }}
                 >
                     <div className={`${(category.category === 'III') ? 'text-pistachio' : 'text-chineseViolet'}`}>
                         <p className='text-2xl font-semibold'>{quizCategory[2].questions} Questions</p>

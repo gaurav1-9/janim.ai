@@ -117,11 +117,11 @@ const InputArea = () => {
                     }
                 }
             )
-            console.log(quizResponse.data)
             navigate("/quiz",{
                 state:{
                     status: true,
-                    quizList: quizResponse.data.questionList
+                    quizList: quizResponse.data.questionList,
+                    inputQuizDetails: userInput
                 }
             })
         } catch (err) {

@@ -5,7 +5,7 @@ import DekstopViewCategory from './DekstopViewCategory';
 const QuizCategory = ({ category, changeCategory, quizCategory, tagList, isGenerating }) => {
     return (
         <div>
-            <DekstopViewCategory category={category} changeCategory={changeCategory} quizCategory={quizCategory} />
+            <DekstopViewCategory category={category} changeCategory={changeCategory} quizCategory={quizCategory} isGenerating={isGenerating} />
             <MobileViewCategory category={category} changeCategory={changeCategory} tagList={tagList} isGenerating={isGenerating} />
         </div>
     )
