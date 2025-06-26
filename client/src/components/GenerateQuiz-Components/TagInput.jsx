@@ -2,9 +2,10 @@ import React from 'react'
 import { RxCrossCircled } from "react-icons/rx";
 import Buttons from '../Buttons';
 import { FaArrowRightLong } from 'react-icons/fa6';
+import { PulseLoader } from 'react-spinners';
 
 
-const TagInput = ({ addTags, removeTag, tags, input, inpErr, setInput, tagList }) => {
+const TagInput = ({ addTags, removeTag, tags, input, inpErr, setInput, tagList, isGenerating}) => {
     const errMsg = ["Enter at least 3 characters.", "Enter atleast one topic tag."]
 
     return (
@@ -31,13 +32,26 @@ const TagInput = ({ addTags, removeTag, tags, input, inpErr, setInput, tagList }
                     placeholder='Add topics (press Enter or Tab to add)...'
                 />
             </div>
-            <div className="hidden lg:flex justify-end">
+            <div className="hidden lg:flex flex-col relative items-end justify-end">
                 <button
                     className={`bg-chineseViolet hover:bg-chineseViolet/90 hover:border-chineseViolet/0' flex justify-center items-center gap-2 border-2 border-chineseViolet rounded-md w-full lg:w-95 text-ivory font-semibold mt-3 lg:py-3 lg:text-xl cursor-pointer`}
                     onClick={tagList}
                 >
-                    <p>Start the Quiz</p>
-                    <FaArrowRightLong />
+                    {
+                        (isGenerating)
+                            ? <>
+                                <p>Generating</p>
+                                <PulseLoader
+                                    color='#e8ebd1'
+                                    size={8}
+                                    loading={isGenerating}
+                                />
+                            </>
+                            : <>
+                                <p>Start the Quiz</p>
+                                <FaArrowRightLong />
+                            </>
+                    }
                 </button>
             </div>
         </div>

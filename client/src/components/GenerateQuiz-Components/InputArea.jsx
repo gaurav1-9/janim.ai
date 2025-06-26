@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import TagInput from './TagInput';
 import CategoryBranch from './CategoryBranch';
 import QuizCategory from './QuizCategory';
+import DataContext from '../../context/DataContext'
+import { useNavigate } from 'react-router-dom';
 
 const InputArea = () => {
+    const navigate = useNavigate()
+    const { user } = useContext(DataContext)
     const questionCategory = [
         {
             category: "I",
@@ -34,6 +38,7 @@ const InputArea = () => {
     const [category, setCategory] = useState(questionCategory[0]);
 
     const show = () => { console.log(category) }
+    const [isGenerating, setIsGenerating] = useState(false)
 
     const addTags = (e) => {
         if ((e.key === "Enter" || e.key === "Tab") && input.trim() !== "") {
@@ -64,7 +69,6 @@ const InputArea = () => {
 
     const changeCategory = (index) => {
         setCategory(questionCategory[index]);
-        show()
     }
 
     const removeTag = (indexToRemove) => {
@@ -72,6 +76,10 @@ const InputArea = () => {
     };
 
     const tagList = () => {
+        if (!user) {
+            navigate("/auth/login", { replace: true })
+            return
+        }
         if (!tags.length) {
             setInperr({
                 isErr: true,
@@ -91,14 +99,14 @@ const InputArea = () => {
             }, 3600);
             return;
         }
-        console.log("Go to Quiz page");
+        setIsGenerating(true)
     }
 
     return (
         <div className='flex flex-col lg:flex-row w-full relative lg:pb-25 lg:mt-10'>
-            <TagInput addTags={addTags} removeTag={removeTag} tags={tags} input={input} inpErr={inpErr} setInput={setInput} tagList={tagList} />
+            <TagInput addTags={addTags} removeTag={removeTag} tags={tags} input={input} inpErr={inpErr} setInput={setInput} tagList={tagList} isGenerating={isGenerating} />
             <CategoryBranch category={category.category} />
-            <QuizCategory category={category} changeCategory={changeCategory} quizCategory={questionCategory} tagList={tagList}/>
+            <QuizCategory category={category} changeCategory={changeCategory} quizCategory={questionCategory} tagList={tagList} />
         </div>
 
     );
