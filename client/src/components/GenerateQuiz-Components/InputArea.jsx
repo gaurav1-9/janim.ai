@@ -37,7 +37,6 @@ const InputArea = () => {
     const [input, setInput] = useState('');
     const [category, setCategory] = useState(questionCategory[0]);
 
-    const show = () => { console.log(category) }
     const [isGenerating, setIsGenerating] = useState(false)
 
     const addTags = (e) => {
@@ -100,13 +99,43 @@ const InputArea = () => {
             return;
         }
         setIsGenerating(true)
+        const userInput = {
+            ...category,
+            tags: tags
+        }
+
+        try {
+            sa
+        } catch (err) {
+            console.log(err)
+            setInperr({
+                isErr: true,
+                errType: 2,
+            });
+            setTimeout(() => {
+                setInperr(prev => ({
+                    ...prev,
+                    isErr: false,
+                }));
+                setTimeout(() => {
+                    setInperr(prev => ({
+                        ...prev,
+                        errType: null,
+                    }));
+                }, 300);
+            }, 10000);
+            return;
+        }
+        finally {
+            setIsGenerating(false)
+        }
     }
 
     return (
         <div className='flex flex-col lg:flex-row w-full relative lg:pb-25 lg:mt-10'>
             <TagInput addTags={addTags} removeTag={removeTag} tags={tags} input={input} inpErr={inpErr} setInput={setInput} tagList={tagList} isGenerating={isGenerating} />
             <CategoryBranch category={category.category} />
-            <QuizCategory category={category} changeCategory={changeCategory} quizCategory={questionCategory} tagList={tagList} />
+            <QuizCategory category={category} changeCategory={changeCategory} quizCategory={questionCategory} tagList={tagList} isGenerating={isGenerating} />
         </div>
 
     );

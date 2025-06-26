@@ -1,8 +1,8 @@
 import React from 'react'
-import Buttons from '../Buttons'
 import { FaArrowRightLong } from 'react-icons/fa6'
+import { PulseLoader } from 'react-spinners'
 
-const MobileViewCategory = ({ category, changeCategory, tagList }) => {
+const MobileViewCategory = ({ category, changeCategory, tagList, isGenerating }) => {
     return (
         <div className="flex flex-col lg:hidden">
             <div className="mt-11 flex justify-center items-center w-full gap-11 md:gap-21 min-[425px]:gap-17 min-[375px]:gap-13 min-[425px]:pt-1 md:pt-4">
@@ -41,13 +41,27 @@ const MobileViewCategory = ({ category, changeCategory, tagList }) => {
                     </div>
                 </div>
             </div>
-            <div className="px-8 md:px-20 lg:hidden mb-5">
+            <div className="px-8 md:px-20 lg:hidden mb-8">
                 <button
                     className={`bg-chineseViolet hover:bg-chineseViolet/90 hover:border-chineseViolet/0' flex justify-center items-center gap-2 border-2 border-chineseViolet rounded-md w-full text-ivory font-semibold py-2 text-lg cursor-pointer`}
                     onClick={tagList}
+                    disabled={isGenerating}
                 >
-                    <p>Start the Quiz</p>
-                    <FaArrowRightLong />
+                    {
+                        (isGenerating)
+                            ? <>
+                                <p>Generating</p>
+                                <PulseLoader
+                                    color='#e8ebd1'
+                                    size={8}
+                                    loading={isGenerating}
+                                />
+                            </>
+                            : <>
+                                <p>Start the Quiz</p>
+                                <FaArrowRightLong />
+                            </>
+                    }
                 </button>
             </div>
         </div>
