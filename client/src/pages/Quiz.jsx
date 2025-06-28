@@ -26,6 +26,20 @@ const Quiz = () => {
         })
     }, [user, location.state, navigate])
 
+    const optionSelector = (qNo, option) => {
+        setQuiz(prevQuiz => ({
+            ...prevQuiz,
+            questionList: prevQuiz.questionList.map((q, i) =>
+                (i === qNo) ? { ...q, selectedOption: option } : q
+            )
+        }));
+    };
+
+    const onSubmitBtn = () => {
+        console.log(quiz)
+    }
+
+
     return (
         <div>
             {
@@ -35,7 +49,13 @@ const Quiz = () => {
                     </div>
                     : <div >
                         <QuizDetails quizDetails={quiz.details} quizLength={quiz.questionList.length} />
-                        <QuizSection quiz={quiz.questionList} />
+                        <QuizSection quiz={quiz.questionList} optionSelector={optionSelector} onSubmitBtn={onSubmitBtn} />
+                        <div className="flex justify-center items-center mb-10">
+                            <button
+                                className='min-w-20 md:w-50 bg-lightRed text-ivory font-semibold rounded-md px-3 py-2 hover:bg-chineseViolet/87 cursor-pointer text-base lg:text-2xl'>
+                                Leave Quiz
+                            </button>
+                        </div>
                         <Footer />
                     </div>
             }
