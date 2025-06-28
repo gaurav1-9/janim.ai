@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import DataContext from '../context/DataContext';
 import QuizSection from '../components/Quiz-Components/QuizSection';
-import QuizDetails from '../components/Quiz-Components/QuizDetails';
+import QuizPlayer from '../components/Quiz-Components/QuizPlayer';
 import Loader from '../components/Loader';
 import Footer from '../components/Footer'
 import axios from 'axios';
@@ -67,6 +67,7 @@ const Quiz = () => {
                         state: {
                             showStatus: true,
                             quizData: quizData,
+                            msg:"Quiz submitted successfully"
                         }
                     }
                 )
@@ -87,7 +88,7 @@ const Quiz = () => {
                         <Loader />
                     </div>
                     : <div >
-                        <QuizDetails quizDetails={quiz.details} quizLength={quiz.questionList.length} />
+                        <QuizPlayer quizDetails={quiz.details} quizLength={quiz.questionList.length} />
                         <QuizSection quiz={quiz.questionList} optionSelector={optionSelector} onSubmitBtn={onSubmitBtn} isSubmitting={isSubmitting} />
 
                         <div className="flex justify-center items-center mb-10">
