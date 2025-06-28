@@ -1,14 +1,26 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import ToasterMsg from '../components/ToasterMsg';
 import DataContext from '../context/DataContext';
+import axios from 'axios';
+
+const baseURL = import.meta.env.VITE_BASE_URL
 
 const QuizDetails = () => {
     const { quizID } = useParams()
     const location = useLocation()
+    const navigate = useNavigate()
     const [quizToasterMsg, setQuizToasterMsg] = useState({ status: location.state?.showStatus, msg: location.state?.msg });
     const [quizDetails, setQuizDetails] = useState({})
     const { user } = useContext(DataContext)
+    const isOwner = user && quizDetails?.user && String(user._id) === String(quizDetails.user);
+
+    useEffect(() => {
+        if (!user) {
+            navigate("/auth/login", { replace: true })
+            return
+        }
+    }, [user])
 
     useEffect(() => {
         if (quizToasterMsg.status) {
@@ -27,16 +39,32 @@ const QuizDetails = () => {
     }, [quizToasterMsg.status]);
 
     useEffect(() => {
+        const uniqueQuiz = async () => {
+            try {
+                const token = localStorage.getItem('token')
+                const res = await axios.get(`${baseURL}/quiz/show-quiz?quizID=${quizID}`, {
+                    headers: {
+                        Authorization: token
+                    }
+                })
+                setQuizDetails(res.data)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
         if (location.state) {
             setQuizDetails(location.state.quizData)
         }
-    }, [location.state])
-    console.log(location.state)
-    console.log(quizDetails)
+        else {
+            uniqueQuiz()
+        }
+    }, [location.state, quizID])
+
     return (
         <>
             {
-                (user._id === quizDetails.user)
+                (isOwner)
                     ? <div>
                         <ToasterMsg toaster={quizToasterMsg} />
                         <p>QuizDetails of {quizID}</p>
@@ -47,7 +75,7 @@ const QuizDetails = () => {
                         <p>Quiz total time {quizDetails.totalQuizDuration}</p>
                     </div>
                     : "Unauthoirized"
-        }
+            }
         </>
     )
 }
