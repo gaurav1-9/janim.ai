@@ -60,7 +60,7 @@ router.post("/submit", verifyToken, async (req, res) => {
         })
     }
     try {
-        await QuizModel.create({
+        const createdQuiz = await QuizModel.create({
             user: userID,
             quizQuestions: quizDetails,
             totalQuizDuration: totalQuizDuration,
@@ -70,7 +70,8 @@ router.post("/submit", verifyToken, async (req, res) => {
         })
         res.status(200).json({
             err: false,
-            msg: "Quiz Submitted"
+            msg: "Quiz Submitted",
+            quizID: createdQuiz._id
         })
     } catch (err) {
         console.log(err)

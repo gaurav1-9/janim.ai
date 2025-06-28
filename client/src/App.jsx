@@ -11,6 +11,7 @@ import DataContext from './context/DataContext'
 import Loader from './components/Loader'
 import EditProfile from './components/Profile/EditProfile';
 import Quiz from './pages/Quiz'
+import QuizDetails from './pages/QuizDetails'
 
 const App = () => {
   const topRef = useRef(null);
@@ -37,6 +38,7 @@ const App = () => {
               <Route path='/quiz' element={<Quiz />} />
               <Route path='/profile' element={<Profile />} />
               <Route path='/edit-profile' element={<EditProfile />} />
+              <Route path='/quiz-details/:quizID' element={<QuizDetails />} />
 
               <Route path='/auth' element={<AuthLayout />}>
                 <Route index element={<Navigate to="login" replace />} />

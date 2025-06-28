@@ -5,6 +5,9 @@ import QuizSection from '../components/Quiz-Components/QuizSection';
 import QuizDetails from '../components/Quiz-Components/QuizDetails';
 import Loader from '../components/Loader';
 import Footer from '../components/Footer'
+import axios from 'axios';
+
+const baseURL = import.meta.env.VITE_BASE_URL
 
 const Quiz = () => {
     const location = useLocation();
@@ -37,12 +40,39 @@ const Quiz = () => {
     };
 
     const onSubmitBtn = async () => {
-        console.log(quiz)
         setIsSubmitting(true)
         try {
-            
+            const token = localStorage.getItem("token")
+            const quizData = {
+                user: user._id,
+                quizDetails: quiz.questionList,
+                totalQuizDuration: parseInt(quiz.details.time.split(' ')[0]),
+                quizCompletionDuration: parseInt(quiz.details.time.split(' ')[0]),
+                isCompleted: true,
+                pointsEarned: parseInt(quiz.details.points)
+            }
+            const quizSubmitResponse = await axios.post(`${baseURL}/quiz/submit`,
+                quizData,
+                {
+                    headers: {
+                        Authorization: token
+                    }
+                },
+            )
+            if (!quizSubmitResponse.data.err) {
+                console.log(quizSubmitResponse.data.quizID)
+                navigate(`/quiz-details/${quizSubmitResponse.data.quizID}`,
+                    {
+                        replace: true,
+                        state: {
+                            showStatus: true,
+                            quizData: quizData,
+                        }
+                    }
+                )
+            }
         } catch (err) {
-            console.log(err)
+            console.log(err.response.data)
         } finally {
             setIsSubmitting(false)
         }
