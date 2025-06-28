@@ -83,8 +83,29 @@ router.post("/submit", verifyToken, async (req, res) => {
 })
 
 router.get("/show-quiz", verifyToken, async (req, res) => {
-    const quiz = await QuizModel.find({ user: req.user.userID });
-    res.json(quiz)
-})
+    try {
+        const { quizID } = req.query;
+        const userID = req.user.userID;
+
+        let query = { user: userID };
+
+        if (quizID) {
+            query._id = quizID;
+        }
+
+        const quiz = (!query._id)
+            ? await QuizModel.find(query)
+            : await QuizModel.findOne(query);
+
+        if (!quiz || quiz.length === 0) {
+            return res.status(404).json({ err: true, msg: "No quiz found." });
+        }
+
+        res.status(200).json(quiz);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ err: true, msg: "Server error." });
+    }
+});
 
 module.exports = router
