@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { PulseLoader } from 'react-spinners';
 
-const QuizSection = ({ quiz, optionSelector, onSubmitBtn }) => {
+const QuizSection = ({ quiz, optionSelector, onSubmitBtn, isSubmitting }) => {
     const [questionCounter, setQuestionCounter] = useState(0)
     return (
         <div className='px-8 py-5 md:px-20 xl:px-40 lg:py-10 flex flex-col mb-5'>
@@ -26,7 +27,10 @@ const QuizSection = ({ quiz, optionSelector, onSubmitBtn }) => {
                                         ? 'bg-ivory'
                                         : 'hover:bg-eerieBlack/5'}
                                 `}
-                                onClick={() => optionSelector(questionCounter, i)}
+                                onClick={() => {
+                                    if (isSubmitting === false) optionSelector(questionCounter, i)
+                                }}
+
                             >
                                 <p className='text-base md:text-lg'>{option}</p>
                             </div>
@@ -47,6 +51,7 @@ const QuizSection = ({ quiz, optionSelector, onSubmitBtn }) => {
                                 setQuestionCounter(questionCounter - 1)
                             }
                         }}
+                        disabled={isSubmitting}
                     >
                         <p className='flex justify-center items-center gap-2 md:gap-4'>
                             <FaArrowLeft className='text-sm md:text-base' />
@@ -63,14 +68,23 @@ const QuizSection = ({ quiz, optionSelector, onSubmitBtn }) => {
                                 onSubmitBtn()
                             }
                         }}
+                        disabled={isSubmitting}
                     >
                         <p className='flex justify-center items-center gap-2 md:gap-4'>
                             {
                                 (questionCounter === quiz.length - 1)
-                                    ? <>
-                                        <span>Submit</span>
-                                        <FaArrowRight className='text-sm md:text-base' />
-                                    </>
+                                    ? (isSubmitting)
+                                        ? <>
+                                            <PulseLoader
+                                                color='#e8ebd1'
+                                                size={8}
+                                                loading={isSubmitting}
+                                            />
+                                        </>
+                                        : <>
+                                            <span>Submit</span>
+                                            <FaArrowRight className='text-sm md:text-base' />
+                                        </>
                                     : <>
                                         <span>Next</span>
                                         <FaArrowRight className='text-sm md:text-base' />

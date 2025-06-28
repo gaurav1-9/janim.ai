@@ -10,6 +10,7 @@ const Quiz = () => {
     const location = useLocation();
     const navigate = useNavigate()
     const [quiz, setQuiz] = useState({})
+    const [isSubmitting, setIsSubmitting] = useState(false)
     const { user } = useContext(DataContext)
     useEffect(() => {
         if (!user) {
@@ -35,8 +36,16 @@ const Quiz = () => {
         }));
     };
 
-    const onSubmitBtn = () => {
+    const onSubmitBtn = async () => {
         console.log(quiz)
+        setIsSubmitting(true)
+        try {
+            
+        } catch (err) {
+            console.log(err)
+        } finally {
+            setIsSubmitting(false)
+        }
     }
 
 
@@ -49,13 +58,18 @@ const Quiz = () => {
                     </div>
                     : <div >
                         <QuizDetails quizDetails={quiz.details} quizLength={quiz.questionList.length} />
-                        <QuizSection quiz={quiz.questionList} optionSelector={optionSelector} onSubmitBtn={onSubmitBtn} />
+                        <QuizSection quiz={quiz.questionList} optionSelector={optionSelector} onSubmitBtn={onSubmitBtn} isSubmitting={isSubmitting} />
+
                         <div className="flex justify-center items-center mb-10">
                             <button
-                                className='min-w-20 md:w-50 bg-lightRed text-ivory font-semibold rounded-md px-3 py-2 hover:bg-chineseViolet/87 cursor-pointer text-base lg:text-2xl'>
+                                className='bg-lightRed text-ivory font-semibold rounded-md px-10 py-2 hover:bg-lightRed/90 cursor-pointer text-base lg:text-2xl'
+                                onClick={() => console.log('Leave')}
+                                disabled={isSubmitting}
+                            >
                                 Leave Quiz
                             </button>
                         </div>
+
                         <Footer />
                     </div>
             }
