@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Tags from '../Tags';
 import QuizStatsMetaData from './QuizStatsMetaData';
+import QuizSolutionTab from './QuizSolutionTab';
 
 const QuizStats = ({ quizStats, quizDetails }) => {
     const uniqueTopics = [...new Set(quizDetails.quizQuestions.map(q => q.topic))];
@@ -18,6 +19,11 @@ const QuizStats = ({ quizStats, quizDetails }) => {
                 </div>
             </div>
             <QuizStatsMetaData quizDetails={quizDetails} quizStats={quizStats} showDetailed={showDetailed} setShowDetailed={setShowDetailed} />
+            {
+                (showDetailed)
+                    ? <QuizSolutionTab quizDetails={quizDetails}/>
+                    : null
+            }
         </div>
     )
 }
