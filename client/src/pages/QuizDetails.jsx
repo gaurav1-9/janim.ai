@@ -15,6 +15,11 @@ const QuizDetails = () => {
     const { user } = useContext(DataContext);
 
     const [quizDetails, setQuizDetails] = useState(null);
+    const [quizStats, setQuizStats] = useState({
+        correct: 0,
+        skipped: 0,
+        wrong: 0,
+    })
     const [loading, setLoading] = useState(true);
     const [quizToasterMsg, setQuizToasterMsg] = useState({
         status: location.state?.showStatus || false,
@@ -44,7 +49,7 @@ const QuizDetails = () => {
                 const res = await axios.get(`${baseURL}/quiz/show-quiz?quizID=${quizID}`, {
                     headers: { Authorization: token }
                 });
-                const quiz = Array.isArray(res.data) ? res.data[0] : res.data;
+                const quiz = res.data;
                 setQuizDetails(quiz);
             } catch (err) {
                 console.error("Fetch error:", err);
@@ -60,6 +65,28 @@ const QuizDetails = () => {
             fetchQuiz();
         }
     }, [location.state, quizID]);
+
+    useEffect(() => {
+        const correctOptions = () => {
+            let correct = 0;
+            let skipped = 0;
+            let wrong = 0;
+
+            quizDetails.quizQuestions.forEach((ans) => {
+                if (ans.answer === ans.selectedOption) {
+                    correct++;
+                } else if (!ans.selectedOption) {
+                    skipped++;
+                } else {
+                    wrong++;
+                }
+            });
+
+            setQuizStats({ correct, skipped, wrong });
+        };
+
+        if (quizDetails) correctOptions();
+    }, [quizDetails]);
 
     const isOwner = user && quizDetails?.user && String(user._id) === String(quizDetails.user);
 
@@ -77,6 +104,10 @@ const QuizDetails = () => {
                         <p>Points earned: {quizDetails.pointsEarned}</p>
                         <p>Completion Time: {quizDetails.quizCompletionDuration}</p>
                         <p>Total Time: {quizDetails.totalQuizDuration}</p>
+                        <p>Total Questions: {quizDetails.quizQuestions.length}</p>
+                        <p>Correct: {quizStats.correct}</p>
+                        <p>Skipped: {quizStats.skipped}</p>
+                        <p>Wrong: {quizStats.wrong}</p>
                     </div>
                     : <UnauthorizedPage />
             }
