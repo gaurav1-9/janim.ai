@@ -4,7 +4,6 @@ import { PulseLoader } from 'react-spinners';
 
 const QuizSection = ({ quiz, optionSelector, onSubmitBtn, isSubmitting }) => {
     const [questionCounter, setQuestionCounter] = useState(0)
-    console.log(quiz[questionCounter])
     return (
         <div className='px-8 py-5 md:px-20 xl:px-40 lg:py-10 flex flex-col mb-5'>
             <div className="text-eerieBlack bg-pistachio py-3 px-5 flex flex-col justify-center items-center rounded-xl md:rounded-2xl shadow-[0_0_17px_rgba(0,0,0,0.25)]">

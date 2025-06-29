@@ -77,10 +77,10 @@ const QuizDetails = () => {
             quizDetails.quizQuestions.forEach((ans) => {
                 if (ans.answer === ans.selectedOption) {
                     correct++;
-                } else if (!ans.selectedOption) {
-                    skipped++;
-                } else {
+                } else if (ans.answer !== ans.selectedOption && ans.selectedOption != null) {
                     wrong++;
+                } else {
+                    skipped++;
                 }
             });
 
