@@ -39,7 +39,7 @@ const Quiz = () => {
         }));
     };
 
-    const onSubmitBtn = async () => {
+    const onSubmitBtn = async (timeLeft) => {
         setIsSubmitting(true)
         try {
             const token = localStorage.getItem("token")
@@ -47,7 +47,7 @@ const Quiz = () => {
                 user: user._id,
                 quizQuestions: quiz.questionList,
                 totalQuizDuration: parseInt(quiz.details.time.split(' ')[0]),
-                quizCompletionDuration: parseInt(quiz.details.time.split(' ')[0]),
+                quizCompletionDuration: parseInt(quiz.details.time.split(' ')[0]) - timeLeft,
                 isCompleted: true,
                 pointsEarned: parseInt(quiz.details.points)
             }
@@ -60,14 +60,13 @@ const Quiz = () => {
                 },
             )
             if (!quizSubmitResponse.data.err) {
-                console.log(quizSubmitResponse.data.quizID)
                 navigate(`/quiz-details/${quizSubmitResponse.data.quizID}`,
                     {
                         replace: true,
                         state: {
                             showStatus: true,
                             quizData: quizData,
-                            msg:"Quiz submitted successfully"
+                            msg: "Quiz submitted successfully"
                         }
                     }
                 )
@@ -79,7 +78,6 @@ const Quiz = () => {
         }
     }
 
-
     return (
         <div>
             {
@@ -89,12 +87,12 @@ const Quiz = () => {
                     </div>
                     : <div >
                         <QuizPlayer quizDetails={quiz.details} quizLength={quiz.questionList.length} />
-                        <QuizSection quiz={quiz.questionList} optionSelector={optionSelector} onSubmitBtn={onSubmitBtn} isSubmitting={isSubmitting} />
+                        <QuizSection quiz={quiz.questionList} quizTime={parseInt(quiz.details.time.split(" ")[0])} optionSelector={optionSelector} onSubmitBtn={onSubmitBtn} isSubmitting={isSubmitting} />
 
                         <div className="flex justify-center items-center mb-10">
                             <button
                                 className='bg-lightRed text-ivory font-semibold rounded-md px-10 py-2 hover:bg-lightRed/90 cursor-pointer text-base lg:text-2xl'
-                                onClick={() => console.log('Leave')}
+                                onClick={() => { navigate('/generate', { replace: true }) }}
                                 disabled={isSubmitting}
                             >
                                 Leave Quiz

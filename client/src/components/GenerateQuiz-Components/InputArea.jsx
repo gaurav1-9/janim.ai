@@ -15,19 +15,19 @@ const InputArea = () => {
         {
             category: "I",
             points: "5",
-            time: "60 seconds",
+            time: "90 seconds",
             questions: "05 to 10"
         },
         {
             category: "II",
             points: "10",
-            time: "75 seconds",
+            time: "120 seconds",
             questions: "11 to 15"
         },
         {
             category: "III",
             points: "15",
-            time: "90 seconds",
+            time: "150 seconds",
             questions: "16 to 20"
         }
     ]
