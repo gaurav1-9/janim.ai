@@ -5,6 +5,8 @@ import DataContext from '../context/DataContext';
 import axios from 'axios';
 import UnauthorizedPage from './UnauthorizedPage';
 import Loader from '../components/Loader';
+import Footer from '../components/Footer';
+import QuizStats from '../components/Quiz-Components/QuizStats';
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 
@@ -98,16 +100,8 @@ const QuizDetails = () => {
             </div>
                 : isOwner
                     ? <div>
-                        <p>QuizDetails of {quizID}</p>
-                        <p>Quiz by {quizDetails.user}</p>
-                        <p>Quiz completed: {quizDetails.isCompleted ? "Yes" : "No"}</p>
-                        <p>Points earned: {quizDetails.pointsEarned}</p>
-                        <p>Completion Time: {quizDetails.quizCompletionDuration}</p>
-                        <p>Total Time: {quizDetails.totalQuizDuration}</p>
-                        <p>Total Questions: {quizDetails.quizQuestions.length}</p>
-                        <p>Correct: {quizStats.correct}</p>
-                        <p>Skipped: {quizStats.skipped}</p>
-                        <p>Wrong: {quizStats.wrong}</p>
+                        <QuizStats quizStats={quizStats} quizDetails={quizDetails} />
+                        <Footer />
                     </div>
                     : <UnauthorizedPage />
             }

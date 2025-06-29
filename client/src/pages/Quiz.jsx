@@ -45,7 +45,7 @@ const Quiz = () => {
             const token = localStorage.getItem("token")
             const quizData = {
                 user: user._id,
-                quizDetails: quiz.questionList,
+                quizQuestions: quiz.questionList,
                 totalQuizDuration: parseInt(quiz.details.time.split(' ')[0]),
                 quizCompletionDuration: parseInt(quiz.details.time.split(' ')[0]),
                 isCompleted: true,

@@ -46,9 +46,9 @@ router.get("/generate", verifyToken, async (req, res) => {
 
 router.post("/submit", verifyToken, async (req, res) => {
     const userID = req.user.userID
-    const { quizDetails, totalQuizDuration, quizCompletionDuration, isCompleted, pointsEarned } = req.body
+    const { quizQuestions, totalQuizDuration, quizCompletionDuration, isCompleted, pointsEarned } = req.body
 
-    if (!quizDetails ||
+    if (!quizQuestions ||
         typeof totalQuizDuration !== "number" ||
         typeof quizCompletionDuration !== "number" ||
         typeof isCompleted !== "boolean" ||
@@ -62,7 +62,7 @@ router.post("/submit", verifyToken, async (req, res) => {
     try {
         const createdQuiz = await QuizModel.create({
             user: userID,
-            quizQuestions: quizDetails,
+            quizQuestions: quizQuestions,
             totalQuizDuration: totalQuizDuration,
             quizCompletionDuration: quizCompletionDuration,
             isCompleted: isCompleted,
