@@ -19,18 +19,28 @@ const UserDetails = ({ user, editProfile }) => {
                 </div>
                 <p className='leading-5 md:leading-8 md:text-2xl'>@{user.username}</p>
                 <div className='flex flex-col justify-end gap-1 pt-5 '>
-                    <div className='flex gap-1 items-center'>
+                    <div
+                        className='flex gap-1 items-center cursor-default'
+                        title={
+                            user.levelPoints <= 15
+                                ? 'Reach 16 points to get the 2nd star'
+                                : user.levelPoints <= 50
+                                    ? 'Reach 51 points to get the 3rd star'
+                                    : 'You have all stars!'
+                        }
+                    >
                         <p className='text-[17px] md:text-xl font-semibold leading-3 md:leading-none'>
                             Level:
-                            <span className='pl-1'>
+                            <span className="pl-1">
                                 {
-                                    (user.levelPoints <= 15)
+                                    user.levelPoints <= 15
                                         ? levels[0]
-                                        : (user.levelPoints > 15 && user.levelPoints <= 30)
+                                        : user.levelPoints <= 50
                                             ? levels[1]
                                             : levels[2]
                                 }
                             </span>
+
                         </p>
                         <p className='text-xs md:text-base hidden md:flex'>({user.levelPoints} points)</p>
                     </div>
@@ -38,7 +48,7 @@ const UserDetails = ({ user, editProfile }) => {
                         <div className='flex gap-1 text-xl md:text-3xl'>
                             <IoStar className='text-chineseViolet' />
                             <IoStar className={`${user.levelPoints > 15 ? 'text-chineseViolet' : 'text-platinum'}`} />
-                            <IoStar className={`${user.levelPoints > 30 ? 'text-chineseViolet' : 'text-platinum'}`} />
+                            <IoStar className={`${user.levelPoints > 50 ? 'text-chineseViolet' : 'text-platinum'}`} />
                         </div>
 
                         <p className='text-xs md:hidden'>({user.levelPoints} points)</p>
