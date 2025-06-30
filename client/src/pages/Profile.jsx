@@ -8,6 +8,7 @@ import UserQuizzes from '../components/Profile/UserQuizzes';
 import Loader from '../components/Loader';
 import NoQuiz from '../components/Profile/NoQuiz';
 import axios from 'axios'
+import UserStats from '../components/Profile/UserStats';
 
 const baseURL = import.meta.env.VITE_BASE_URL
 
@@ -101,7 +102,10 @@ const Profile = () => {
           </div>
           : (user.levelPoints === 0)
             ? <NoQuiz />
-            : <UserQuizzes quizzes={quizzes} quizStats={quizStats}/>
+            : <>
+              <UserQuizzes quizzes={quizzes} quizStats={quizStats} />
+              <UserStats />
+            </>
       }
       <Footer />
     </div>
