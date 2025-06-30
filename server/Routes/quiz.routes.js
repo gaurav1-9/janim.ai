@@ -94,7 +94,7 @@ router.get("/show-quiz", verifyToken, async (req, res) => {
         }
 
         const quiz = (!query._id)
-            ? await QuizModel.find(query)
+            ? await QuizModel.find(query).sort({createdAt:-1})
             : await QuizModel.findOne(query);
 
         if (!quiz || quiz.length === 0) {
