@@ -5,7 +5,7 @@ import { PiNotePencil } from "react-icons/pi";
 const UserDetails = ({ user, editProfile }) => {
     const levels = ["Explorer", "Challenger", "Mastermind"]
     return (
-        <div className='px-8 py-5 md:px-20 xl:px-40 lg:py-10 flex gap-3 md:gap-5 items-center justify-center md:justify-start'>
+        <div className='px-8 py-5 md:px-20 xl:px-40 lg:py-10 lg:pb-5 flex gap-3 md:gap-5 items-center justify-center md:justify-start'>
             <div className='rounded-full border-4 md:border-6 w-30 md:w-45 lg:w-60 overflow-clip border-chineseViolet'>
                 <img src={`/Avatars/Square_Images/${user.gender}_Av${user.avatar}.png`} alt="profile pic" draggable={false} />
             </div>
