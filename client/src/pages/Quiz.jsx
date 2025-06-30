@@ -14,7 +14,7 @@ const Quiz = () => {
     const navigate = useNavigate()
     const [quiz, setQuiz] = useState({})
     const [isSubmitting, setIsSubmitting] = useState(false)
-    const { user } = useContext(DataContext)
+    const { user, checkAuth } = useContext(DataContext)
     useEffect(() => {
         if (!user) {
             navigate("/auth/login", { replace: true })
@@ -60,6 +60,14 @@ const Quiz = () => {
                 },
             )
             if (!quizSubmitResponse.data.err) {
+                await axios.patch(`${baseURL}/users/edit`, {
+                    levelPoints: parseInt(quiz.details.points)
+                }, {
+                    headers: {
+                        Authorization: token
+                    }
+                });
+                await checkAuth();
                 navigate(`/quiz-details/${quizSubmitResponse.data.quizID}`,
                     {
                         replace: true,

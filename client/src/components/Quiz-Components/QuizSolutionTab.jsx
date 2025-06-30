@@ -65,12 +65,12 @@ const QuizSolutionTab = ({ quizDetails }) => {
                     {
                         (showExplanation)
                             ? <>
-                                Hide explaination
+                                Hide explanation
                                 <IoIosArrowUp />
                             </>
                             :
                             <>
-                                See explaination
+                                See explanation
                                 <IoIosArrowDown />
                             </>
                     }

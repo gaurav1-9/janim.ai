@@ -24,9 +24,9 @@ const UserDetails = ({ user, editProfile }) => {
                             Level:
                             <span className='pl-1'>
                                 {
-                                    (user.levelPoints <= 10)
+                                    (user.levelPoints <= 15)
                                         ? levels[0]
-                                        : (user.levelPoints > 10 && user.levelPoints <= 20)
+                                        : (user.levelPoints > 15 && user.levelPoints <= 30)
                                             ? levels[1]
                                             : levels[2]
                                 }
@@ -37,8 +37,8 @@ const UserDetails = ({ user, editProfile }) => {
                     <div className="flex gap-3 items-end">
                         <div className='flex gap-1 text-xl md:text-3xl'>
                             <IoStar className='text-chineseViolet' />
-                            <IoStar className={`${user.levelPoints > 10 ? 'text-chineseViolet' : 'text-platinum'}`} />
-                            <IoStar className={`${user.levelPoints > 20 ? 'text-chineseViolet' : 'text-platinum'}`} />
+                            <IoStar className={`${user.levelPoints > 15 ? 'text-chineseViolet' : 'text-platinum'}`} />
+                            <IoStar className={`${user.levelPoints > 30 ? 'text-chineseViolet' : 'text-platinum'}`} />
                         </div>
 
                         <p className='text-xs md:hidden'>({user.levelPoints} points)</p>

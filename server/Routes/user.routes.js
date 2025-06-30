@@ -3,26 +3,26 @@ const UserModel = require("../Models/UserSchema")
 const { verifyToken } = require("./auth.routes")
 
 router.get("/profile", verifyToken, async (req, res) => {
-    const userID = req.user.userID
-    try {
-        const userData = await UserModel.findById(userID).select("-password")
-        if (!userData) {
-            return res.status(404).json({
-                err: true,
-                msg: "No user found"
-            })
-        }
-        res.status(200).json({
-            err: false,
-            msg: "User Found",
-            userData: userData,
-        })
-    } catch (err) {
-        res.status(500).json({
-            err: true,
-            msg: "server Error"
-        })
+  const userID = req.user.userID
+  try {
+    const userData = await UserModel.findById(userID).select("-password")
+    if (!userData) {
+      return res.status(404).json({
+        err: true,
+        msg: "No user found"
+      })
     }
+    res.status(200).json({
+      err: false,
+      msg: "User Found",
+      userData: userData,
+    })
+  } catch (err) {
+    res.status(500).json({
+      err: true,
+      msg: "server Error"
+    })
+  }
 })
 
 router.patch("/edit", verifyToken, async (req, res) => {
@@ -38,7 +38,7 @@ router.patch("/edit", verifyToken, async (req, res) => {
       });
     }
 
-    const { name, username, gender, avatar } = req.body;
+    const { name, username, gender, avatar, levelPoints } = req.body;
 
     if (name && name.trim()) {
       userData.name = name.trim();
@@ -63,6 +63,10 @@ router.patch("/edit", verifyToken, async (req, res) => {
       userData.avatar = avatar;
     }
 
+    if (levelPoints) {
+      userData.levelPoints = userData.levelPoints + levelPoints;
+    }
+
     await userData.save();
 
     res.status(200).json({
@@ -78,7 +82,7 @@ router.patch("/edit", verifyToken, async (req, res) => {
     });
 
   } catch (err) {
-    console.log(userID+" /users/edit: "+err)
+    console.log(userID + " /users/edit: " + err)
     res.status(500).json({
       err: true,
       msg: "Server error"
