@@ -10,7 +10,7 @@ const QuizDetails = ({ quizDetails, quizLength }) => {
             <div className="flex gap-2 mt-2 mb-5">
                 {
                     quizDetails.tags.map((tag, index) => (
-                        <Tags key={index} tagName={tag} />
+                        <Tags key={index} tagName={tag} textSize={'text-base lg:text-lg'}/>
                     ))
                 }
             </div>

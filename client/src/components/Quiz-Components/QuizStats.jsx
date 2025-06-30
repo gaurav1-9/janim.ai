@@ -13,7 +13,7 @@ const QuizStats = ({ quizStats, quizDetails }) => {
                 <div className='flex gap-2 flex-wrap'>
                     {
                         uniqueTopics.map((tag, i) => (
-                            <Tags key={i} tagName={tag} />
+                            <Tags key={i} tagName={tag} textSize={'text-base lg:text-lg'}/>
                         ))
                     }
                 </div>

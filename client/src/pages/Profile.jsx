@@ -7,6 +7,9 @@ import ToasterMsg from '../components/ToasterMsg';
 import UserQuizzes from '../components/Profile/UserQuizzes';
 import Loader from '../components/Loader';
 import NoQuiz from '../components/Profile/NoQuiz';
+import axios from 'axios'
+
+const baseURL = import.meta.env.VITE_BASE_URL
 
 const Profile = () => {
   const location = useLocation();
@@ -14,6 +17,8 @@ const Profile = () => {
   const { user } = useContext(DataContext)
   const [editToast, setEditToast] = useState({ status: location.state?.status, msg: location.state?.msg })
   const [quizLoader, setQuizLoader] = useState(true)
+  const [quizzes, setQuizzes] = useState([])
+  const [quizStats, setQuizStats] = useState([]);
 
   useEffect(() => {
     if (editToast.status) {
@@ -44,21 +49,45 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserQuizzes = async () => {
       try {
-        console.log(user.levelPoints)
+        const token = localStorage.getItem('token')
+        const res = await axios.get(`${baseURL}/quiz/show-quiz`, {
+          headers: {
+            Authorization: token
+          }
+        })
+        setQuizzes(res.data)
       } catch (err) {
-
+        console.log(err)
       } finally {
         setQuizLoader(false)
       }
     }
 
-    if (user && user.levelPoints) {
+    if (user && user.levelPoints != 0) {
       fetchUserQuizzes()
     }
     else {
       setQuizLoader(false)
     }
-  })
+  }, [user])
+
+  useEffect(() => {
+    const correctOptions = () => {
+      const stats = quizzes.map((quiz) => {
+        let correct = 0;
+        quiz.quizQuestions.forEach((ans) => {
+          if (ans.answer === ans.selectedOption) {
+            correct++;
+          }
+        });
+        return correct;
+      });
+
+      setQuizStats(stats);
+    };
+
+    if (quizzes && quizzes.length > 0) correctOptions();
+  }, [quizzes]);
 
   if (!user) return null;
   return (
@@ -72,7 +101,7 @@ const Profile = () => {
           </div>
           : (user.levelPoints === 0)
             ? <NoQuiz />
-            : <UserQuizzes />
+            : <UserQuizzes quizzes={quizzes} quizStats={quizStats}/>
       }
       <Footer />
     </div>
