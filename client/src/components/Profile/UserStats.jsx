@@ -1,6 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-const UserStats = () => {
+const UserStats = ({ quizzes, quizStats }) => {
+    const [performance, setPerformance] = useState(0)
+
+    useEffect(() => {
+        let score = 0;
+        let total = 0;
+
+        quizStats.forEach((correct) => {
+            score += correct;
+        });
+
+        quizzes.forEach((quiz) => {
+            total += quiz.quizQuestions.length;
+        });
+
+        if (total > 0) {
+            const percentage = (score / total) * 100;
+            const rounded = ((percentage - Math.floor(percentage)) > 0.5)
+                ? Math.floor(percentage) + 1
+                : Math.floor(percentage);
+            setPerformance(rounded);
+        } else {
+            setPerformance(0);
+        }
+    }, [quizStats, quizzes]);
+    
     return (
         <div className="flex flex-col py-8 lg:py-13 bg-seaSalt items-center w-full">
             <p className='w-70 md:w-full text-3xl md:text-4xl lg:text-5xl text-eerieBlack font-semibold text-center'>

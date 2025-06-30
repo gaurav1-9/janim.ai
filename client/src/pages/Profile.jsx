@@ -104,7 +104,7 @@ const Profile = () => {
             ? <NoQuiz />
             : <>
               <UserQuizzes quizzes={quizzes} quizStats={quizStats} />
-              <UserStats />
+              <UserStats quizzes={quizzes} quizStats={quizStats}/>
             </>
       }
       <Footer />
