@@ -151,21 +151,24 @@ const InputArea = () => {
     }
 
     useEffect(() => {
+        let timeout;
+
         if (isGenerating) {
-            setTimeout(() => {
-                setShowMsg(true)
+            timeout = setTimeout(() => {
+                setShowMsg(true);
             }, 15000);
+        } else {
+            setShowMsg(false);
         }
-        else {
-            setShowMsg(false)
-        }
-    }, [isGenerating])
+
+        return () => clearTimeout(timeout);
+    }, [isGenerating]);
 
     return (
         <div className='flex flex-col lg:flex-row w-full relative lg:pb-25 lg:mt-10'>
-            <TagInput addTags={addTags} removeTag={removeTag} tags={tags} input={input} inpErr={inpErr} setInput={setInput} tagList={tagList} isGenerating={isGenerating} showMsg={showMsg}/>
+            <TagInput addTags={addTags} removeTag={removeTag} tags={tags} input={input} inpErr={inpErr} setInput={setInput} tagList={tagList} isGenerating={isGenerating} showMsg={showMsg} />
             <CategoryBranch category={category.category} />
-            <QuizCategory category={category} changeCategory={changeCategory} quizCategory={questionCategory} tagList={tagList} isGenerating={isGenerating} showMsg={showMsg}/>
+            <QuizCategory category={category} changeCategory={changeCategory} quizCategory={questionCategory} tagList={tagList} isGenerating={isGenerating} showMsg={showMsg} />
         </div>
 
     );
