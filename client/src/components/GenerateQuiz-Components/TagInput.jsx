@@ -5,7 +5,7 @@ import { FaArrowRightLong } from 'react-icons/fa6';
 import { PulseLoader } from 'react-spinners';
 
 
-const TagInput = ({ addTags, removeTag, tags, input, inpErr, setInput, tagList, isGenerating }) => {
+const TagInput = ({ addTags, removeTag, tags, input, inpErr, setInput, tagList, isGenerating, showMsg }) => {
     const errMsg = ["Enter at least 3 characters.", "Enter atleast one topic tag.", "Unable to generate quiz. Try again later..."]
 
     return (
@@ -62,6 +62,7 @@ const TagInput = ({ addTags, removeTag, tags, input, inpErr, setInput, tagList, 
                             </>
                     }
                 </button>
+                <p className={`absolute text-chineseViolet ${(showMsg) ? 'opacity-100 -bottom-6' : 'opacity-0 invisible -bottom-4'}  duration-300 ease-in-out`}>Might take some time...</p>
             </div>
         </div>
     )

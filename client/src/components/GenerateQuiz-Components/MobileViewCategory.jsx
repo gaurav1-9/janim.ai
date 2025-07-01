@@ -2,7 +2,7 @@ import React from 'react'
 import { FaArrowRightLong } from 'react-icons/fa6'
 import { PulseLoader } from 'react-spinners'
 
-const MobileViewCategory = ({ category, changeCategory, tagList, isGenerating }) => {
+const MobileViewCategory = ({ category, changeCategory, tagList, isGenerating, showMsg }) => {
     return (
         <div className="flex flex-col lg:hidden">
             <div className="mt-11 flex justify-center items-center w-full gap-11 md:gap-21 min-[425px]:gap-17 min-[375px]:gap-13 min-[425px]:pt-1 md:pt-4">
@@ -69,6 +69,8 @@ const MobileViewCategory = ({ category, changeCategory, tagList, isGenerating })
                             </>
                     }
                 </button>
+                <p className={`absolute text-chineseViolet ${(showMsg) ? 'opacity-100 bottom-7' : 'opacity-0 invisible bottom-9'}  duration-300 ease-in-out`}>Might take some time...</p>
+                <div className="mt-3 mb-5"></div>
             </div>
         </div>
     )
