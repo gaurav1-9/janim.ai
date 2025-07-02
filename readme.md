@@ -1,6 +1,6 @@
 # janim.ai - AI driven quiz application
 
-🔗[janim.ai](https://janim-ai.vercel.app)
+🔗[janim.ai - Live Link](https://janim-ai.vercel.app)\
 🖌️[Figma design link](https://www.figma.com/design/aQIRG5U0yKRwp4gFV2WePR/janim.ai?fuid=1365551287841215768)
 ## 📸 Project Screenshots
 <p align="center">
