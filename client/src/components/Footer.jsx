@@ -43,7 +43,7 @@ const Footer = () => {
             </div>
             <div className='flex justify-center items-center gap-1 text-ivory text-sm lg:text-2xl pb-5 lg:pb-5 pt-10 lg:pt-20'>
                 <PiCopyright className='text-lg' />
-                <p>{year}, Made with</p>
+                <p>2025 - {year}, Made with</p>
                 <FcLike />
                 <p> by Gaurav Kumar Das</p>
             </div>
