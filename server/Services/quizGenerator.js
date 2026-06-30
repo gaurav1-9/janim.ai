@@ -11,7 +11,8 @@ async function quizGenerator(noOfQuestions, questionTopics) {
             body: JSON.stringify({
                 // model: "deepseek/deepseek-r1-0528:free",
                 // model: "google/gemma-3-4b-it:free",
-                model: "google/gemma-3-27b-it:free",
+                // model: "google/gemma-3-27b-it:free",
+                model: "google/gemma-4-26b-a4b-it:free",
                 messages: [
                     {
                         role: "user",
